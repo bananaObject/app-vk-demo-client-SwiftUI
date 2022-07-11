@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F283FA58287C8C820049AB17 /* vkSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F283FA57287C8C820049AB17 /* vkSwiftUIApp.swift */; };
+		F283FA58287C8C820049AB17 /* VkSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F283FA57287C8C820049AB17 /* VkSwiftUIApp.swift */; };
 		F283FA5A287C8C820049AB17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F283FA59287C8C820049AB17 /* ContentView.swift */; };
 		F283FA5C287C8C830049AB17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F283FA5B287C8C830049AB17 /* Assets.xcassets */; };
 		F283FA5F287C8C830049AB17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F283FA5E287C8C830049AB17 /* Preview Assets.xcassets */; };
@@ -15,7 +15,7 @@
 
 /* Begin PBXFileReference section */
 		F283FA54287C8C820049AB17 /* vkSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vkSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F283FA57287C8C820049AB17 /* vkSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vkSwiftUIApp.swift; sourceTree = "<group>"; };
+		F283FA57287C8C820049AB17 /* VkSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkSwiftUIApp.swift; sourceTree = "<group>"; };
 		F283FA59287C8C820049AB17 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F283FA5B287C8C830049AB17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F283FA5E287C8C830049AB17 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -51,7 +51,7 @@
 		F283FA56287C8C820049AB17 /* vkSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				F283FA57287C8C820049AB17 /* vkSwiftUIApp.swift */,
+				F283FA57287C8C820049AB17 /* VkSwiftUIApp.swift */,
 				F283FA59287C8C820049AB17 /* ContentView.swift */,
 				F283FA5B287C8C830049AB17 /* Assets.xcassets */,
 				F283FA5D287C8C830049AB17 /* Preview Content */,
@@ -77,6 +77,7 @@
 				F283FA50287C8C820049AB17 /* Sources */,
 				F283FA51287C8C820049AB17 /* Frameworks */,
 				F283FA52287C8C820049AB17 /* Resources */,
+				F283FA66287C8E340049AB17 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -138,7 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F283FA5A287C8C820049AB17 /* ContentView.swift in Sources */,
-				F283FA58287C8C820049AB17 /* vkSwiftUIApp.swift in Sources */,
+				F283FA58287C8C820049AB17 /* VkSwiftUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
