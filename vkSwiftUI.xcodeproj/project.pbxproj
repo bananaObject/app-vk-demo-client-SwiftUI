@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F21B8E2C2882D474004E7868 /* FriendsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21B8E2B2882D474004E7868 /* FriendsListScreen.swift */; };
 		F25AC1AB287DBCE900800585 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25AC1AA287DBCE900800585 /* LoginScreen.swift */; };
 		F283FA58287C8C820049AB17 /* VkSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F283FA57287C8C820049AB17 /* VkSwiftUIApp.swift */; };
 		F283FA5C287C8C830049AB17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F283FA5B287C8C830049AB17 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F21B8E2B2882D474004E7868 /* FriendsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListScreen.swift; sourceTree = "<group>"; };
 		F25AC1AA287DBCE900800585 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		F283FA54287C8C820049AB17 /* vkSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vkSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F283FA57287C8C820049AB17 /* VkSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkSwiftUIApp.swift; sourceTree = "<group>"; };
@@ -34,10 +36,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F25AC1A9287DBC8F00800585 /* Screens */ = {
+		F21B8E2D2882D47A004E7868 /* Friend List */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Friend List";
+			sourceTree = "<group>";
+		};
+		F21B8E2E2882D486004E7868 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				F25AC1AA287DBCE900800585 /* LoginScreen.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		F25AC1A9287DBC8F00800585 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				F21B8E2E2882D486004E7868 /* Login */,
+				F21B8E2D2882D47A004E7868 /* Friend List */,
+				F21B8E2B2882D474004E7868 /* FriendsListScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -194,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2EBB79928801D420004352D /* Color.swift in Sources */,
+				F21B8E2C2882D474004E7868 /* FriendsListScreen.swift in Sources */,
 				F283FA58287C8C820049AB17 /* VkSwiftUIApp.swift in Sources */,
 				F25AC1AB287DBCE900800585 /* LoginScreen.swift in Sources */,
 			);
