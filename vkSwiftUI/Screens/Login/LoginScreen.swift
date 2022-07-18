@@ -29,7 +29,6 @@ struct LoginScreen: View {
             .padding([.trailing, .leading], safeAreaPadding)
             .background(mainColor)
         }
-
     }
 
     private func buttonAction() {
@@ -60,7 +59,6 @@ extension LoginScreen {
         .frame(height: height, alignment: .center)
         .background(.white)
         .cornerRadius(8)
-        .clipped()
         .disableAutocorrection(true)
     }
 
@@ -72,7 +70,7 @@ extension LoginScreen {
                    alignment: .center)
             .background(.white)
             .cornerRadius(8)
-            .clipped()
+            .tint(mainColor)
             .disabled(loginText.isEmpty || passwordText.isEmpty)
     }
 }

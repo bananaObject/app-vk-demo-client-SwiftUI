@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F21B8E2C2882D474004E7868 /* FriendsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21B8E2B2882D474004E7868 /* FriendsListScreen.swift */; };
+		F21B8E302882D54A004E7868 /* FriendsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21B8E2F2882D54A004E7868 /* FriendsListScreen.swift */; };
 		F25AC1AB287DBCE900800585 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25AC1AA287DBCE900800585 /* LoginScreen.swift */; };
+		F272CA7B28858A39007ACA36 /* FriendsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F272CA7A28858A39007ACA36 /* FriendsListCell.swift */; };
+		F272CA7F2885906A007ACA36 /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F272CA7E2885906A007ACA36 /* ImageModifier.swift */; };
 		F283FA58287C8C820049AB17 /* VkSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F283FA57287C8C820049AB17 /* VkSwiftUIApp.swift */; };
 		F283FA5C287C8C830049AB17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F283FA5B287C8C830049AB17 /* Assets.xcassets */; };
 		F283FA5F287C8C830049AB17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F283FA5E287C8C830049AB17 /* Preview Assets.xcassets */; };
@@ -16,8 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F21B8E2B2882D474004E7868 /* FriendsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListScreen.swift; sourceTree = "<group>"; };
+		F21B8E2F2882D54A004E7868 /* FriendsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListScreen.swift; sourceTree = "<group>"; };
 		F25AC1AA287DBCE900800585 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		F272CA7A28858A39007ACA36 /* FriendsListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListCell.swift; sourceTree = "<group>"; };
+		F272CA7E2885906A007ACA36 /* ImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
 		F283FA54287C8C820049AB17 /* vkSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vkSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F283FA57287C8C820049AB17 /* VkSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkSwiftUIApp.swift; sourceTree = "<group>"; };
 		F283FA5B287C8C830049AB17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -39,6 +43,7 @@
 		F21B8E2D2882D47A004E7868 /* Friend List */ = {
 			isa = PBXGroup;
 			children = (
+				F21B8E2F2882D54A004E7868 /* FriendsListScreen.swift */,
 			);
 			path = "Friend List";
 			sourceTree = "<group>";
@@ -56,9 +61,41 @@
 			children = (
 				F21B8E2E2882D486004E7868 /* Login */,
 				F21B8E2D2882D47A004E7868 /* Friend List */,
-				F21B8E2B2882D474004E7868 /* FriendsListScreen.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		F272CA7728858965007ACA36 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F272CA802885939D007ACA36 /* View Builder */,
+				F272CA7D28859053007ACA36 /* Modifier */,
+				F272CA7C28859049007ACA36 /* View */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		F272CA7C28859049007ACA36 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F272CA7A28858A39007ACA36 /* FriendsListCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F272CA7D28859053007ACA36 /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				F272CA7E2885906A007ACA36 /* ImageModifier.swift */,
+			);
+			path = Modifier;
+			sourceTree = "<group>";
+		};
+		F272CA802885939D007ACA36 /* View Builder */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Builder";
 			sourceTree = "<group>";
 		};
 		F283FA4B287C8C820049AB17 = {
@@ -80,6 +117,7 @@
 		F283FA56287C8C820049AB17 /* vkSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				F272CA7728858965007ACA36 /* UI */,
 				F2EBB79B28801E3C0004352D /* App Delegate */,
 				F2EBB79A28801E210004352D /* Resource */,
 				F25AC1A9287DBC8F00800585 /* Screens */,
@@ -213,9 +251,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2EBB79928801D420004352D /* Color.swift in Sources */,
-				F21B8E2C2882D474004E7868 /* FriendsListScreen.swift in Sources */,
+				F272CA7F2885906A007ACA36 /* ImageModifier.swift in Sources */,
 				F283FA58287C8C820049AB17 /* VkSwiftUIApp.swift in Sources */,
 				F25AC1AB287DBCE900800585 /* LoginScreen.swift in Sources */,
+				F21B8E302882D54A004E7868 /* FriendsListScreen.swift in Sources */,
+				F272CA7B28858A39007ACA36 /* FriendsListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
