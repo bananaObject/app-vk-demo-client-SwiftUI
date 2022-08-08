@@ -8,20 +8,49 @@
 import SwiftUI
 
 struct FriendsListScreen: View {
+    @State private var friendsSection = [
+        ["Шпак Aлександр Юрьев ", "Шпек Семенов Aлександр"],
+        ["Щпак Василий Семенов"]
+    ]
+
     var body: some View {
-        VStack {
-            Text("Friends")
-                .font(.title)
-            List(0..<20) { _ in
-                ListCell(imageUrl: "friendFoto",
-                         textCell: "Aлександр Семенов Шпак")
-            }
-            .listStyle(PlainListStyle())
+        NavigationView {
+            friendsList
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(trailing: EditButton())
         }
     }
 }
 
-struct FriendsList_Previews: PreviewProvider {
+extension FriendsListScreen {
+    var friendsList: some View {
+        List {
+            ForEach(friendsSection, id: \.self) { section in
+                Section(String(section[0].first!)) {
+                    ForEach(section, id: \.self) { friend in
+                        NavigationLink {
+                            FriendPhotosCollection(nameFriend: friend)
+                        } label: {
+                            ListCell(imageUrl: "friendFoto",
+                                     textCell: friend)
+                        }
+                    }
+                }
+            }
+            .onDelete { index in
+                friendsSection.remove(atOffsets: index)
+            }
+            .onMove { index, value in
+                friendsSection.move(fromOffsets: index, toOffset: value)
+
+            }
+            .navigationTitle("Friends")
+        }
+        .listStyle(.inset)
+    }
+}
+
+struct FriendsListScreen_Previews: PreviewProvider {
     static var previews: some View {
         FriendsListScreen()
     }
