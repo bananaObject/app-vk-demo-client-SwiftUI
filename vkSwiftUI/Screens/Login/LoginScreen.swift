@@ -30,10 +30,8 @@ extension LoginScreen {
     private var loginView: some View {
         VStack {
             Spacer()
-
             logoImage
             loginButton
-
             Spacer()
         }
         .padding([.trailing, .leading], safeAreaPadding)
