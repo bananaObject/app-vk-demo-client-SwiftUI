@@ -8,14 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		F21B8E302882D54A004E7868 /* FriendsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21B8E2F2882D54A004E7868 /* FriendsListScreen.swift */; };
-		F231DAE828A118340065B734 /* ChooseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231DAE728A118340065B734 /* ChooseScreen.swift */; };
-		F231DAEA28A118480065B734 /* ChooseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231DAE928A118480065B734 /* ChooseViewModel.swift */; };
 		F231DAF028A131720065B734 /* FriendPhotosCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231DAEF28A131720065B734 /* FriendPhotosCollection.swift */; };
 		F25AC1AB287DBCE900800585 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25AC1AA287DBCE900800585 /* LoginScreen.swift */; };
-		F2660D6A289FDDCC00EEEFAF /* LoginWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2660D69289FDDCC00EEEFAF /* LoginWebView.swift */; };
-		F2660D6F289FF39C00EEEFAF /* KeychainLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2660D6E289FF39C00EEEFAF /* KeychainLayer.swift */; };
 		F2660D72289FF3DE00EEEFAF /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F2660D71289FF3DE00EEEFAF /* KeychainSwift */; };
-		F2660D74289FF90100EEEFAF /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2660D73289FF90100EEEFAF /* LoginViewModel.swift */; };
 		F2660D7928A023D900EEEFAF /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2660D7828A023D900EEEFAF /* MainScreen.swift */; };
 		F272CA7B28858A39007ACA36 /* FriendsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F272CA7A28858A39007ACA36 /* FriendsListCell.swift */; };
 		F272CA7F2885906A007ACA36 /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F272CA7E2885906A007ACA36 /* ImageModifier.swift */; };
@@ -27,13 +22,8 @@
 
 /* Begin PBXFileReference section */
 		F21B8E2F2882D54A004E7868 /* FriendsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListScreen.swift; sourceTree = "<group>"; };
-		F231DAE728A118340065B734 /* ChooseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseScreen.swift; sourceTree = "<group>"; };
-		F231DAE928A118480065B734 /* ChooseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseViewModel.swift; sourceTree = "<group>"; };
 		F231DAEF28A131720065B734 /* FriendPhotosCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPhotosCollection.swift; sourceTree = "<group>"; };
 		F25AC1AA287DBCE900800585 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
-		F2660D69289FDDCC00EEEFAF /* LoginWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWebView.swift; sourceTree = "<group>"; };
-		F2660D6E289FF39C00EEEFAF /* KeychainLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainLayer.swift; sourceTree = "<group>"; };
-		F2660D73289FF90100EEEFAF /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F2660D7828A023D900EEEFAF /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		F272CA7A28858A39007ACA36 /* FriendsListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListCell.swift; sourceTree = "<group>"; };
 		F272CA7E2885906A007ACA36 /* ImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
@@ -68,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				F25AC1AA287DBCE900800585 /* LoginScreen.swift */,
-				F2660D73289FF90100EEEFAF /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -76,8 +65,6 @@
 		F231DAEB28A12BD10065B734 /* Choose */ = {
 			isa = PBXGroup;
 			children = (
-				F231DAE928A118480065B734 /* ChooseViewModel.swift */,
-				F231DAE728A118340065B734 /* ChooseScreen.swift */,
 			);
 			path = Choose;
 			sourceTree = "<group>";
@@ -113,7 +100,6 @@
 		F2660D6D289FF39200EEEFAF /* Layers */ = {
 			isa = PBXGroup;
 			children = (
-				F2660D6E289FF39C00EEEFAF /* KeychainLayer.swift */,
 			);
 			path = Layers;
 			sourceTree = "<group>";
@@ -139,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				F272CA7A28858A39007ACA36 /* FriendsListCell.swift */,
-				F2660D69289FDDCC00EEEFAF /* LoginWebView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -312,7 +297,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2EBB79928801D420004352D /* Color.swift in Sources */,
-				F231DAEA28A118480065B734 /* ChooseViewModel.swift in Sources */,
 				F272CA7F2885906A007ACA36 /* ImageModifier.swift in Sources */,
 				F2660D7928A023D900EEEFAF /* MainScreen.swift in Sources */,
 				F283FA58287C8C820049AB17 /* VkSwiftUIApp.swift in Sources */,
@@ -320,10 +304,6 @@
 				F21B8E302882D54A004E7868 /* FriendsListScreen.swift in Sources */,
 				F272CA7B28858A39007ACA36 /* FriendsListCell.swift in Sources */,
 				F231DAF028A131720065B734 /* FriendPhotosCollection.swift in Sources */,
-				F2660D6A289FDDCC00EEEFAF /* LoginWebView.swift in Sources */,
-				F2660D74289FF90100EEEFAF /* LoginViewModel.swift in Sources */,
-				F2660D6F289FF39C00EEEFAF /* KeychainLayer.swift in Sources */,
-				F231DAE828A118340065B734 /* ChooseScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
