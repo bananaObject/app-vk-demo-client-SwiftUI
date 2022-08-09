@@ -20,6 +20,21 @@ struct FriendsListScreen: View {
                 .navigationBarItems(trailing: EditButton())
         }
     }
+
+    private func deleteFriend(_ index: IndexSet, _ section: [String]) {
+        let indexSection = friendsSection.firstIndex(of: section) ?? 0
+
+        if friendsSection[indexSection].count <= 1 {
+            friendsSection.remove(at: indexSection)
+        } else {
+            friendsSection[indexSection].remove(atOffsets: index)
+        }
+    }
+
+    private func moveFriend(_ index: IndexSet, _ section: [String], _ value: Int) {
+        let indexSection = friendsSection.firstIndex(of: section) ?? 0
+        friendsSection[indexSection].move(fromOffsets: index, toOffset: value)
+    }
 }
 
 extension FriendsListScreen {
@@ -35,14 +50,13 @@ extension FriendsListScreen {
                                      textCell: friend)
                         }
                     }
+                    .onDelete { index in
+                        deleteFriend(index, section)
+                    }
+                    .onMove { index, value in
+                        moveFriend(index, section, value)
+                    }
                 }
-            }
-            .onDelete { index in
-                friendsSection.remove(atOffsets: index)
-            }
-            .onMove { index, value in
-                friendsSection.move(fromOffsets: index, toOffset: value)
-
             }
             .navigationTitle("Friends")
         }
