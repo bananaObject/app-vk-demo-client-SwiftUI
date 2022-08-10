@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ChooseViewModel: ObservableObject {
+class ChooseViewModel: ObservableObject, RequestBase {
     var loadIsCompleted: Bool = false {
         didSet {
             objectWillChange.send()
@@ -22,15 +22,22 @@ class ChooseViewModel: ObservableObject {
 
     init() {}
 
+    private func requestCheckTokenAsync() async throws -> Bool {
+        let data = try await requestBase(endpoint: .getUser)
+
+        let json: [String: Any]? = try JSONSerialization.jsonObject(
+            with: data,
+            options: .mutableContainers
+        ) as? [String: Any]
+
+        let result = json?.keys.contains("response") ?? false
+
+        return result
+    }
+
     func checkToken() {
-        // В будущем добавлю запрос на проверку токена
-        loadIsCompleted = true
-
-        guard let _ = KeychainLayer.shared.get(.token) else {
-            tokenIsValid = false
-            return
+        Task { @MainActor in
+            tokenIsValid = try await requestCheckTokenAsync()
         }
-
-        tokenIsValid = true
     }
 }
