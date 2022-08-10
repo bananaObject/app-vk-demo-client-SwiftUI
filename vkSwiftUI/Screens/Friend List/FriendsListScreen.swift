@@ -8,54 +8,34 @@
 import SwiftUI
 
 struct FriendsListScreen: View {
-    @State private var friendsSection = [
-        ["Шпак Aлександр Юрьев ", "Шпек Семенов Aлександр"],
-        ["Щпак Василий Семенов"]
-    ]
+    @ObservedObject var viewModel = FriendsViewModel()
 
     var body: some View {
         NavigationView {
             friendsList
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarItems(trailing: EditButton())
+                .onAppear {
+                    viewModel.fetchFriends()
+                }
         }
-    }
-
-    private func deleteFriend(_ index: IndexSet, _ section: [String]) {
-        let indexSection = friendsSection.firstIndex(of: section) ?? 0
-
-        if friendsSection[indexSection].count <= 1 {
-            friendsSection.remove(at: indexSection)
-        } else {
-            friendsSection[indexSection].remove(atOffsets: index)
-        }
-    }
-
-    private func moveFriend(_ index: IndexSet, _ section: [String], _ value: Int) {
-        let indexSection = friendsSection.firstIndex(of: section) ?? 0
-        friendsSection[indexSection].move(fromOffsets: index, toOffset: value)
     }
 }
 
 extension FriendsListScreen {
     var friendsList: some View {
         List {
-            ForEach(friendsSection, id: \.self) { section in
-                Section(String(section[0].first!)) {
-                    ForEach(section, id: \.self) { friend in
+            ForEach(viewModel.letter, id: \.self) { section in
+                Section(section) {
+                    ForEach(viewModel.section[section] ?? [], id: \.id) { friend in
                         NavigationLink {
-                            FriendPhotosCollection(nameFriend: friend)
+                            FriendPhotosCollection(friend: friend)
                         } label: {
-                            ListCell(imageUrl: "friendFoto",
-                                     textCell: friend)
+                            ListCell(friend)
                         }
                     }
-                    .onDelete { index in
-                        deleteFriend(index, section)
-                    }
-                    .onMove { index, value in
-                        moveFriend(index, section, value)
-                    }
+                    .onDelete { viewModel.deleteFriend($0, section) }
+                    .onMove { viewModel.moveFriend($0, section, $1) }
                 }
             }
             .navigationTitle("Friends")

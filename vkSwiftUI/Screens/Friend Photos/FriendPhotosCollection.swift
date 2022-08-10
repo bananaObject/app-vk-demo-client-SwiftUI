@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct FriendPhotosCollection: View {
-    var nameFriend: String
+    var friend: FriendViewModel
 
     var body: some View {
         VStack {}
-        .navigationTitle("Photo \(nameFriend)")
+            .navigationTitle("Photo \(friend.lastName)")
     }
 }
 
 struct FriendPhotosCollection_Previews: PreviewProvider {
     static var previews: some View {
-        FriendPhotosCollection(nameFriend: "Igor")
+        FriendPhotosCollection(friend: FriendViewModel(id: 0, firstName: "Bery", lastName: "Jaaamr", image: nil))
     }
 }

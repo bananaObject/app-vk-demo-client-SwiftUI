@@ -27,6 +27,15 @@
 		F2E85E2428A3C2F400798835 /* EndpointBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E1E28A3C2F400798835 /* EndpointBase.swift */; };
 		F2E85E2528A3C2F400798835 /* RequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E1F28A3C2F400798835 /* RequestMethod.swift */; };
 		F2E85E2628A3C2F400798835 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E2028A3C2F400798835 /* RequestError.swift */; };
+		F2E85E2A28A3D03200798835 /* database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E2828A3D03200798835 /* database.xcdatamodeld */; };
+		F2E85E5328A3D35100798835 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E5028A3D35100798835 /* Persistence.swift */; };
+		F2E85E5E28A3DC0800798835 /* FriendModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E5C28A3DC0800798835 /* FriendModel+CoreDataClass.swift */; };
+		F2E85E5F28A3DC0800798835 /* FriendModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E5D28A3DC0800798835 /* FriendModel+CoreDataProperties.swift */; };
+		F2E85E6128A3E26000798835 /* CodingUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E6028A3E26000798835 /* CodingUserInfoKey.swift */; };
+		F2E85E6428A3E3CD00798835 /* ApiLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E6328A3E3CD00798835 /* ApiLayer.swift */; };
+		F2E85E6628A3E3E900798835 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E6528A3E3E900798835 /* Responses.swift */; };
+		F2E85E6828A3E4D800798835 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E6728A3E4D800798835 /* FriendsViewModel.swift */; };
+		F2E85E6B28A3F6BE00798835 /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E6A28A3F6BE00798835 /* FriendViewModel.swift */; };
 		F2EBB79928801D420004352D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EBB79828801D420004352D /* Color.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +60,15 @@
 		F2E85E1E28A3C2F400798835 /* EndpointBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointBase.swift; sourceTree = "<group>"; };
 		F2E85E1F28A3C2F400798835 /* RequestMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestMethod.swift; sourceTree = "<group>"; };
 		F2E85E2028A3C2F400798835 /* RequestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
+		F2E85E2928A3D03200798835 /* database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = database.xcdatamodel; sourceTree = "<group>"; };
+		F2E85E5028A3D35100798835 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		F2E85E5C28A3DC0800798835 /* FriendModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendModel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F2E85E5D28A3DC0800798835 /* FriendModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F2E85E6028A3E26000798835 /* CodingUserInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodingUserInfoKey.swift; sourceTree = "<group>"; };
+		F2E85E6328A3E3CD00798835 /* ApiLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiLayer.swift; sourceTree = "<group>"; };
+		F2E85E6528A3E3E900798835 /* Responses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
+		F2E85E6728A3E4D800798835 /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
+		F2E85E6A28A3F6BE00798835 /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
 		F2EBB79828801D420004352D /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				F21B8E2F2882D54A004E7868 /* FriendsListScreen.swift */,
+				F2E85E6728A3E4D800798835 /* FriendsViewModel.swift */,
 			);
 			path = "Friend List";
 			sourceTree = "<group>";
@@ -124,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				F2E85E1928A3C2F400798835 /* Api */,
+				F2E85E6328A3E3CD00798835 /* ApiLayer.swift */,
 				F2660D6E289FF39C00EEEFAF /* KeychainLayer.swift */,
 			);
 			path = Layers;
@@ -182,6 +202,7 @@
 		F283FA56287C8C820049AB17 /* vkSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				F2E85E2B28A3D19E00798835 /* Models */,
 				F2660D55289FDACE00EEEFAF /* Support */,
 				F272CA7728858965007ACA36 /* UI */,
 				F2EBB79B28801E3C0004352D /* App Delegate */,
@@ -228,10 +249,38 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		F2E85E2B28A3D19E00798835 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F2E85E6928A3F68C00798835 /* View Models */,
+				F2E85E6228A3E3B600798835 /* Core data */,
+				F2E85E6528A3E3E900798835 /* Responses.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F2E85E6228A3E3B600798835 /* Core data */ = {
+			isa = PBXGroup;
+			children = (
+				F2E85E5C28A3DC0800798835 /* FriendModel+CoreDataClass.swift */,
+				F2E85E5D28A3DC0800798835 /* FriendModel+CoreDataProperties.swift */,
+			);
+			path = "Core data";
+			sourceTree = "<group>";
+		};
+		F2E85E6928A3F68C00798835 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				F2E85E6A28A3F6BE00798835 /* FriendViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
 		F2EBB79728801D330004352D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				F2EBB79828801D420004352D /* Color.swift */,
+				F2E85E6028A3E26000798835 /* CodingUserInfoKey.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -239,8 +288,10 @@
 		F2EBB79A28801E210004352D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				F2E85E5028A3D35100798835 /* Persistence.swift */,
 				F283FA5D287C8C830049AB17 /* Preview Content */,
 				F283FA5B287C8C830049AB17 /* Assets.xcassets */,
+				F2E85E2828A3D03200798835 /* database.xcdatamodeld */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -352,22 +403,31 @@
 			files = (
 				F2EBB79928801D420004352D /* Color.swift in Sources */,
 				F231DAEA28A118480065B734 /* ChooseViewModel.swift in Sources */,
+				F2E85E5F28A3DC0800798835 /* FriendModel+CoreDataProperties.swift in Sources */,
 				F272CA7F2885906A007ACA36 /* ImageModifier.swift in Sources */,
 				F2E85E2228A3C2F400798835 /* ApiEndpoint.swift in Sources */,
 				F2660D7928A023D900EEEFAF /* MainScreen.swift in Sources */,
 				F283FA58287C8C820049AB17 /* VkSwiftUIApp.swift in Sources */,
+				F2E85E6628A3E3E900798835 /* Responses.swift in Sources */,
 				F2E85E2328A3C2F400798835 /* RequestBase.swift in Sources */,
+				F2E85E6828A3E4D800798835 /* FriendsViewModel.swift in Sources */,
 				F2E85E2528A3C2F400798835 /* RequestMethod.swift in Sources */,
 				F2E85E2628A3C2F400798835 /* RequestError.swift in Sources */,
 				F25AC1AB287DBCE900800585 /* LoginScreen.swift in Sources */,
 				F21B8E302882D54A004E7868 /* FriendsListScreen.swift in Sources */,
 				F2E85E2428A3C2F400798835 /* EndpointBase.swift in Sources */,
+				F2E85E6B28A3F6BE00798835 /* FriendViewModel.swift in Sources */,
+				F2E85E5328A3D35100798835 /* Persistence.swift in Sources */,
 				F272CA7B28858A39007ACA36 /* FriendsListCell.swift in Sources */,
 				F231DAF028A131720065B734 /* FriendPhotosCollection.swift in Sources */,
 				F2660D6A289FDDCC00EEEFAF /* LoginWebView.swift in Sources */,
+				F2E85E6128A3E26000798835 /* CodingUserInfoKey.swift in Sources */,
+				F2E85E2A28A3D03200798835 /* database.xcdatamodeld in Sources */,
 				F2660D74289FF90100EEEFAF /* LoginViewModel.swift in Sources */,
+				F2E85E5E28A3DC0800798835 /* FriendModel+CoreDataClass.swift in Sources */,
 				F2660D6F289FF39C00EEEFAF /* KeychainLayer.swift in Sources */,
 				F231DAE828A118340065B734 /* ChooseScreen.swift in Sources */,
+				F2E85E6428A3E3CD00798835 /* ApiLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,6 +647,19 @@
 			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		F2E85E2828A3D03200798835 /* database.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F2E85E2928A3D03200798835 /* database.xcdatamodel */,
+			);
+			currentVersion = F2E85E2928A3D03200798835 /* database.xcdatamodel */;
+			path = database.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F283FA4C287C8C820049AB17 /* Project object */;
 }
