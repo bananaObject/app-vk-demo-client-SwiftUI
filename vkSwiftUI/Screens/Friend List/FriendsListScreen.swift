@@ -5,10 +5,13 @@
 //  Created by Ke4a on 16.07.2022.
 //
 
+import CoreData
 import SwiftUI
 
 struct FriendsListScreen: View {
     @ObservedObject var viewModel = FriendsViewModel()
+    
+    @Environment(\.managedObjectContext) private var context: NSManagedObjectContext
 
     var body: some View {
         NavigationView {
@@ -16,31 +19,41 @@ struct FriendsListScreen: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarItems(trailing: EditButton())
                 .onAppear {
-                    viewModel.fetchFriends()
+                    if viewModel.firstTime {
+                        viewModel.setupContex(context)
+                        viewModel.setupCoredataController()
+                        viewModel.deleteAllInBd()
+                        viewModel.fetchFriends()
+
+                        viewModel.firstTime.toggle()
+                    }
                 }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
 extension FriendsListScreen {
     var friendsList: some View {
-        List {
-            ForEach(viewModel.letter, id: \.self) { section in
-                Section(section) {
-                    ForEach(viewModel.section[section] ?? [], id: \.id) { friend in
-                        NavigationLink {
-                            FriendPhotosCollection(friend: friend)
-                        } label: {
-                            ListCell(friend)
+        VStack {
+            List {
+                ForEach(viewModel.letter, id: \.self) { name in
+                    Section(name) {
+                        if let section = viewModel.section[name] {
+                            ForEach(section, id: \.id) { friend in
+                                NavigationLink {
+                                    FriendPhotosCollection(friend: friend)
+                                } label: {
+                                    ListCell(friend)
+                                }
+                            }
                         }
+
                     }
-                    .onDelete { viewModel.deleteFriend($0, section) }
-                    .onMove { viewModel.moveFriend($0, section, $1) }
                 }
             }
-            .navigationTitle("Friends")
+            .listStyle(.inset)
         }
-        .listStyle(.inset)
     }
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F20767E928A547AC000B67C7 /* FriendModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20767E728A547AC000B67C7 /* FriendModel+CoreDataClass.swift */; };
+		F20767EA28A547AC000B67C7 /* FriendModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20767E828A547AC000B67C7 /* FriendModel+CoreDataProperties.swift */; };
 		F21B8E302882D54A004E7868 /* FriendsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21B8E2F2882D54A004E7868 /* FriendsListScreen.swift */; };
 		F231DAE828A118340065B734 /* ChooseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231DAE728A118340065B734 /* ChooseScreen.swift */; };
 		F231DAEA28A118480065B734 /* ChooseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231DAE928A118480065B734 /* ChooseViewModel.swift */; };
@@ -29,8 +31,6 @@
 		F2E85E2628A3C2F400798835 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E2028A3C2F400798835 /* RequestError.swift */; };
 		F2E85E2A28A3D03200798835 /* database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E2828A3D03200798835 /* database.xcdatamodeld */; };
 		F2E85E5328A3D35100798835 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E5028A3D35100798835 /* Persistence.swift */; };
-		F2E85E5E28A3DC0800798835 /* FriendModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E5C28A3DC0800798835 /* FriendModel+CoreDataClass.swift */; };
-		F2E85E5F28A3DC0800798835 /* FriendModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E5D28A3DC0800798835 /* FriendModel+CoreDataProperties.swift */; };
 		F2E85E6128A3E26000798835 /* CodingUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E6028A3E26000798835 /* CodingUserInfoKey.swift */; };
 		F2E85E6428A3E3CD00798835 /* ApiLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E6328A3E3CD00798835 /* ApiLayer.swift */; };
 		F2E85E6628A3E3E900798835 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E85E6528A3E3E900798835 /* Responses.swift */; };
@@ -40,6 +40,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F20767E728A547AC000B67C7 /* FriendModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendModel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F20767E828A547AC000B67C7 /* FriendModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F21B8E2F2882D54A004E7868 /* FriendsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListScreen.swift; sourceTree = "<group>"; };
 		F231DAE728A118340065B734 /* ChooseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseScreen.swift; sourceTree = "<group>"; };
 		F231DAE928A118480065B734 /* ChooseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseViewModel.swift; sourceTree = "<group>"; };
@@ -62,8 +64,6 @@
 		F2E85E2028A3C2F400798835 /* RequestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		F2E85E2928A3D03200798835 /* database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = database.xcdatamodel; sourceTree = "<group>"; };
 		F2E85E5028A3D35100798835 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		F2E85E5C28A3DC0800798835 /* FriendModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendModel+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F2E85E5D28A3DC0800798835 /* FriendModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F2E85E6028A3E26000798835 /* CodingUserInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodingUserInfoKey.swift; sourceTree = "<group>"; };
 		F2E85E6328A3E3CD00798835 /* ApiLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiLayer.swift; sourceTree = "<group>"; };
 		F2E85E6528A3E3E900798835 /* Responses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
@@ -186,6 +186,8 @@
 		F283FA4B287C8C820049AB17 = {
 			isa = PBXGroup;
 			children = (
+				F20767E728A547AC000B67C7 /* FriendModel+CoreDataClass.swift */,
+				F20767E828A547AC000B67C7 /* FriendModel+CoreDataProperties.swift */,
 				F283FA56287C8C820049AB17 /* vkSwiftUI */,
 				F283FA55287C8C820049AB17 /* Products */,
 			);
@@ -262,8 +264,7 @@
 		F2E85E6228A3E3B600798835 /* Core data */ = {
 			isa = PBXGroup;
 			children = (
-				F2E85E5C28A3DC0800798835 /* FriendModel+CoreDataClass.swift */,
-				F2E85E5D28A3DC0800798835 /* FriendModel+CoreDataProperties.swift */,
+				F2E85E7028A4191400798835 /* Friend */,
 			);
 			path = "Core data";
 			sourceTree = "<group>";
@@ -274,6 +275,13 @@
 				F2E85E6A28A3F6BE00798835 /* FriendViewModel.swift */,
 			);
 			path = "View Models";
+			sourceTree = "<group>";
+		};
+		F2E85E7028A4191400798835 /* Friend */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Friend;
 			sourceTree = "<group>";
 		};
 		F2EBB79728801D330004352D /* Extensions */ = {
@@ -403,8 +411,9 @@
 			files = (
 				F2EBB79928801D420004352D /* Color.swift in Sources */,
 				F231DAEA28A118480065B734 /* ChooseViewModel.swift in Sources */,
-				F2E85E5F28A3DC0800798835 /* FriendModel+CoreDataProperties.swift in Sources */,
+				F20767EA28A547AC000B67C7 /* FriendModel+CoreDataProperties.swift in Sources */,
 				F272CA7F2885906A007ACA36 /* ImageModifier.swift in Sources */,
+				F20767E928A547AC000B67C7 /* FriendModel+CoreDataClass.swift in Sources */,
 				F2E85E2228A3C2F400798835 /* ApiEndpoint.swift in Sources */,
 				F2660D7928A023D900EEEFAF /* MainScreen.swift in Sources */,
 				F283FA58287C8C820049AB17 /* VkSwiftUIApp.swift in Sources */,
@@ -424,7 +433,6 @@
 				F2E85E6128A3E26000798835 /* CodingUserInfoKey.swift in Sources */,
 				F2E85E2A28A3D03200798835 /* database.xcdatamodeld in Sources */,
 				F2660D74289FF90100EEEFAF /* LoginViewModel.swift in Sources */,
-				F2E85E5E28A3DC0800798835 /* FriendModel+CoreDataClass.swift in Sources */,
 				F2660D6F289FF39C00EEEFAF /* KeychainLayer.swift in Sources */,
 				F231DAE828A118340065B734 /* ChooseScreen.swift in Sources */,
 				F2E85E6428A3E3CD00798835 /* ApiLayer.swift in Sources */,

@@ -12,7 +12,7 @@ struct ListCell: View {
     private var image: String
 
     init(_ friend: FriendViewModel) {
-        self.text = friend.lastName + " " + friend.firstName
+        self.text = friend.lastName + " " + friend.firstName  
         self.image = "friendFoto"
     }
 

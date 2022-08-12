@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 protocol ApiLayer: RequestBase {
-    var contex: NSManagedObjectContext { get set }
+    var contex: NSManagedObjectContext? { get set }
     func sendRequestList<T: Decodable>(
         endpoint: ApiEndpoint,
         responseModel: T.Type
@@ -59,8 +59,8 @@ extension ApiLayer {
 }
 
 class Api: ApiLayer {
-    var contex: NSManagedObjectContext
-    init(_ context: NSManagedObjectContext) {
+    var contex: NSManagedObjectContext?
+    init(_ context: NSManagedObjectContext?) {
         self.contex = context
     }
 }

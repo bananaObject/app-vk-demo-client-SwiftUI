@@ -2,12 +2,13 @@
 //  FriendModel+CoreDataProperties.swift
 //  vkSwiftUI
 //
-//  Created by Ke4a on 10.08.2022.
+//  Created by Ke4a on 11.08.2022.
 //
 //
 
-import CoreData
 import Foundation
+import CoreData
+
 
 extension FriendModel {
 
@@ -15,13 +16,14 @@ extension FriendModel {
         return NSFetchRequest<FriendModel>(entityName: "FriendModel")
     }
 
+    @NSManaged public var avatar: String
+    @NSManaged public var firstName: String
     @NSManaged public var id: Int32
-    @NSManaged public var firstName: String?
-    @NSManaged public var lastName: String?
+    @NSManaged public var lastName: String
     @NSManaged public var online: Int32
-    @NSManaged public var avatar: String?
+
 }
 
-extension FriendModel: Identifiable {
+extension FriendModel : Identifiable {
 
 }
