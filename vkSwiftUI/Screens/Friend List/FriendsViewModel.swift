@@ -45,6 +45,7 @@ class FriendsViewModel: NSObject, ObservableObject {
     }
 
     func fetchFriends() {
+        deleteAllInBd()
         Task {
             let result = await api.sendRequestList(endpoint: .getFriends,
                                                    responseModel: FriendModel.self)

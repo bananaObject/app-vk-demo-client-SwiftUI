@@ -20,11 +20,11 @@ struct FriendsListScreen: View {
                 .navigationBarItems(trailing: EditButton())
                 .onAppear {
                     if viewModel.firstTime {
+                        #warning("Пока при каждом запуске удаляются все данные из бд, так как еще не сделал обновление старых данных и нормальную работу core data")
                         viewModel.setupContex(context)
                         viewModel.setupCoredataController()
-                        viewModel.deleteAllInBd()
                         viewModel.fetchFriends()
-
+                        #warning("Баг двойной запуск жизненого цикла фиксится только вот так")
                         viewModel.firstTime.toggle()
                     }
                 }
