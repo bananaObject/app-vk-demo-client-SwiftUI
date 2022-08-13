@@ -20,7 +20,8 @@ struct FriendsListScreen: View {
                 .navigationBarItems(trailing: EditButton())
                 .onAppear {
                     if viewModel.firstTime {
-                        #warning("Пока при каждом запуске удаляются все данные из бд, так как еще не сделал обновление старых данных и нормальную работу core data")
+                        #warning("Пока при каждом запуске удаляются все данные из бд")
+                        #warning("так как еще не сделал обновление старых данных и нормальную работу core data")
                         viewModel.setupContex(context)
                         viewModel.setupCoredataController()
                         viewModel.fetchFriends()

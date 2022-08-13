@@ -9,10 +9,10 @@ import SwiftUI
 
 struct LoginScreen: View {
     @ObservedObject private var viewModel = LoginViewModel()
-
+    
     private let mainColor = Color.main
     private let safeAreaPadding: CGFloat = 8
-
+    
     var body: some View {
         if viewModel.mainIsShow {
             MainScreen()
@@ -45,13 +45,15 @@ extension LoginScreen {
             .padding(.bottom, 20)
             .foregroundColor(.white)
     }
-
+    
     private var loginButton: some View {
-        Button("Войти", action: viewModel.buttonAction)
-            .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
-            .background(.white)
-            .cornerRadius(8)
-            .tint(mainColor)
+        Button(action: viewModel.buttonAction){
+            Text("Войти")
+                .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
+                .background(.white)
+                .cornerRadius(8)
+                .tint(mainColor)
+        }
     }
 }
 
