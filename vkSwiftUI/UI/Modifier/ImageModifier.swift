@@ -26,3 +26,12 @@ extension Image {
             .modifier(AvatarModifier())
     }
 }
+
+extension AsyncImage {
+    func avatarStyle(_ size: Double) -> some View {
+        self
+            .aspectRatio(contentMode: .fit)
+            .frame(width: size, height: size, alignment: .center)
+            .modifier(AvatarModifier())
+    }
+}

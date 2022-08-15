@@ -9,17 +9,25 @@ import SwiftUI
 
 struct ListCell: View {
     private var text: String
-    private var image: String
-
+    private var image: URL?
+    
+    @State private var isShakeOn = false
+    
     init(_ friend: FriendViewModel) {
-        self.text = friend.lastName + " " + friend.firstName  
-        self.image = "friendFoto"
+        self.text = friend.lastName + " " + friend.firstName
+        self.image = friend.image
     }
-
+    
     var body: some View {
         HStack {
-            Image(image)
+            AsyncImage(url: image)
                 .avatarStyle(70)
+                .shakeAnimation(isShakeOn)
+                .onTapGesture {
+                    withAnimation(.default) {
+                        isShakeOn.toggle()
+                    }
+                }
             Text(text)
                 .lineLimit(1)
                 .padding()
