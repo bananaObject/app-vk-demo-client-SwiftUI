@@ -11,9 +11,9 @@ struct ListCell: View {
     private var text: String
     private var image: String
 
-    init(imageUrl: String, textCell: String) {
-        self.text = textCell
-        self.image = imageUrl
+    init(_ friend: FriendViewModel) {
+        self.text = friend.lastName + " " + friend.firstName  
+        self.image = "friendFoto"
     }
 
     var body: some View {

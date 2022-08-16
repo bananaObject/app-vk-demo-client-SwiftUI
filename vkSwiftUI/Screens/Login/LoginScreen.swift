@@ -8,26 +8,22 @@
 import SwiftUI
 
 struct LoginScreen: View {
-    @State private var mainIsShow = false
-
+    @ObservedObject private var viewModel = LoginViewModel()
+    
     private let mainColor = Color.main
     private let safeAreaPadding: CGFloat = 8
-
+    
     var body: some View {
-        if mainIsShow {
+        if viewModel.mainIsShow {
             MainScreen()
         } else {
-            loginView
+            login
         }
-    }
-
-    private func buttonAction() {
-        mainIsShow = true
     }
 }
 
 extension LoginScreen {
-    private var loginView: some View {
+    private var login: some View {
         VStack {
             Spacer()
             logoImage
@@ -36,8 +32,10 @@ extension LoginScreen {
         }
         .padding([.trailing, .leading], safeAreaPadding)
         .background(mainColor)
+        .sheet(isPresented: $viewModel.webViewIsShow) {
+            LoginWebView(viewModel: viewModel)
+        }
     }
-
     private var logoImage: some View {
         Image("vkLogo")
             .resizable()
@@ -47,13 +45,15 @@ extension LoginScreen {
             .padding(.bottom, 20)
             .foregroundColor(.white)
     }
-
+    
     private var loginButton: some View {
-        Button("Войти", action: buttonAction)
-            .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
-            .background(.white)
-            .cornerRadius(8)
-            .tint(mainColor)
+        Button(action: viewModel.buttonAction){
+            Text("Войти")
+                .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
+                .background(.white)
+                .cornerRadius(8)
+                .tint(mainColor)
+        }
     }
 }
 

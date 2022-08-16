@@ -5,62 +5,56 @@
 //  Created by Ke4a on 16.07.2022.
 //
 
+import CoreData
 import SwiftUI
 
 struct FriendsListScreen: View {
-    @State private var friendsSection = [
-        ["Шпак Aлександр Юрьев ", "Шпек Семенов Aлександр"],
-        ["Щпак Василий Семенов"]
-    ]
+    @ObservedObject var viewModel = FriendsViewModel()
+    
+    @Environment(\.managedObjectContext) private var context: NSManagedObjectContext
 
     var body: some View {
         NavigationView {
             friendsList
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarItems(trailing: EditButton())
+                .onAppear {
+                    if viewModel.firstTime {
+                        #warning("Пока при каждом запуске удаляются все данные из бд")
+                        #warning("так как еще не сделал обновление старых данных и нормальную работу core data")
+                        viewModel.setupContex(context)
+                        viewModel.setupCoredataController()
+                        viewModel.fetchFriends()
+                        #warning("Баг двойной запуск жизненого цикла фиксится только вот так")
+                        viewModel.firstTime.toggle()
+                    }
+                }
         }
-    }
-
-    private func deleteFriend(_ index: IndexSet, _ section: [String]) {
-        let indexSection = friendsSection.firstIndex(of: section) ?? 0
-
-        if friendsSection[indexSection].count <= 1 {
-            friendsSection.remove(at: indexSection)
-        } else {
-            friendsSection[indexSection].remove(atOffsets: index)
-        }
-    }
-
-    private func moveFriend(_ index: IndexSet, _ section: [String], _ value: Int) {
-        let indexSection = friendsSection.firstIndex(of: section) ?? 0
-        friendsSection[indexSection].move(fromOffsets: index, toOffset: value)
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
 extension FriendsListScreen {
     var friendsList: some View {
-        List {
-            ForEach(friendsSection, id: \.self) { section in
-                Section(String(section[0].first!)) {
-                    ForEach(section, id: \.self) { friend in
-                        NavigationLink {
-                            FriendPhotosCollection(nameFriend: friend)
-                        } label: {
-                            ListCell(imageUrl: "friendFoto",
-                                     textCell: friend)
+        VStack {
+            List {
+                ForEach(viewModel.letter, id: \.self) { name in
+                    Section(name) {
+                        if let section = viewModel.section[name] {
+                            ForEach(section, id: \.id) { friend in
+                                NavigationLink {
+                                    FriendPhotosCollection(friend: friend)
+                                } label: {
+                                    ListCell(friend)
+                                }
+                            }
                         }
-                    }
-                    .onDelete { index in
-                        deleteFriend(index, section)
-                    }
-                    .onMove { index, value in
-                        moveFriend(index, section, value)
+
                     }
                 }
             }
-            .navigationTitle("Friends")
+            .listStyle(.inset)
         }
-        .listStyle(.inset)
     }
 }
 

@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct VkSwiftUIApp: App {
+    private var dataController = Persistence()
+
     var body: some Scene {
         WindowGroup {
-            LoginScreen()
+            ChooseScreen()
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }
