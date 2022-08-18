@@ -8,35 +8,29 @@
 import SwiftUI
 
 struct ChooseScreen: View {
-    @ObservedObject private var viewModel = ChooseViewModel()
-
+    var viewModel: ChooseViewModel
+    
     var body: some View {
-        Group {
-            if viewModel.tokenIsValid && viewModel.loadIsCompleted {
-                MainScreen()
-            } else if viewModel.loadIsCompleted {
-                LoginScreen()
-            } else {
-                loadingView
+        loadingView
+            .onAppear {
+                viewModel.checkToken()
             }
-        }
-        .onAppear { viewModel.checkToken() }
     }
 }
 
 extension ChooseScreen {
-    private var loadingView: some View {
+    var loadingView: some View {
         VStack {
-            Text("В будущем будет анимация загрузки")
-                .foregroundColor(.white)
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                .scaleEffect(1.5)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .background(Color.main)
     }
 }
-
 struct ChooseScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ChooseScreen()
+        ChooseScreen(viewModel: ChooseViewModel())
     }
 }

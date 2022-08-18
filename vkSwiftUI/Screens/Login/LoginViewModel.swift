@@ -32,7 +32,10 @@ class LoginViewModel: NSObject, ObservableObject, WKNavigationDelegate, LoginVie
         saveToken(fragment)
 
         webViewIsShow = false
-        mainIsShow = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.mainIsShow = true
+        }
     }
 
     func buttonAction() {

@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension FriendModel {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<FriendModel> {
