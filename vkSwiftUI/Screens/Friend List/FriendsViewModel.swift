@@ -84,7 +84,7 @@ class FriendsViewModel: NSObject, ObservableObject {
             let viewModel = FriendViewModel(id: Int(friend.id),
                                             firstName: friend.firstName,
                                             lastName: friend.lastName,
-                                            image: nil)
+                                            image: URL(string: friend.avatar))
             var oldValue = section[letter] ?? []
             oldValue.append(viewModel)
 
@@ -98,7 +98,7 @@ class FriendsViewModel: NSObject, ObservableObject {
         FriendViewModel(id: Int(friend.id),
                         firstName: friend.firstName,
                         lastName: friend.lastName,
-                        image: nil)
+                        image: URL(string: friend.avatar))
     }
 }
 
