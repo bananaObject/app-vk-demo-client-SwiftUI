@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct ChooseScreen: View {
-    var viewModel: ChooseViewModel
+struct OnboardingScreen: View {
+    weak var viewModel: OnboardingViewModel?
     
     var body: some View {
         loadingView
             .onAppear {
-                viewModel.checkToken()
+                viewModel?.checkToken()
             }
     }
 }
 
-extension ChooseScreen {
+extension OnboardingScreen {
     var loadingView: some View {
         VStack {
             ProgressView()
@@ -29,8 +29,9 @@ extension ChooseScreen {
         .background(Color.main)
     }
 }
-struct ChooseScreen_Previews: PreviewProvider {
+
+struct OnboardingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ChooseScreen(viewModel: ChooseViewModel())
+        OnboardingScreen(viewModel: OnboardingViewModel())
     }
 }

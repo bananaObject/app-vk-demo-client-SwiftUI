@@ -11,25 +11,30 @@ import SwiftUI
 
 class FriendsViewModel: NSObject, ObservableObject {
     @Published var section: [String: [FriendViewModel]] = [:]
+    @Published var selectedFriend: FriendViewModel?
+
     var firstTime = true
-    private var context: NSManagedObjectContext?
-    private var fetchController: NSFetchedResultsController<FriendModel>?
 
     var letter: [String] {
         Array(section.keys).sorted()
     }
-
     private lazy var api = Api(context)
+
+    private var context: NSManagedObjectContext?
+    private var fetchController: NSFetchedResultsController<FriendModel>?
+
+    init(_ context: NSManagedObjectContext?) {
+        super.init()
+        self.context = context
+        setupCoredataController()
+    }
 
     func setupContex(_ context: NSManagedObjectContext) {
         self.context = context
     }
 
     func setupCoredataController() {
-        guard let context = context else {
-            return
-        }
-
+        guard let context = context else { return }
         let fetchRequest: NSFetchRequest<FriendModel> = FriendModel.fetchRequest()
         fetchRequest.sortDescriptors = []
 

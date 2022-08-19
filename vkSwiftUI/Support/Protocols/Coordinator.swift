@@ -5,12 +5,12 @@
 //  Created by Ke4a on 18.08.2022.
 //
 
-import Foundation
+import UIKit
 
 protocol Coordinator {
-    func newCoordinating(_ child: Coordinating)
-}
-
-protocol Coordinating {
-    func start()
+    var controller: UIViewController? { get }
+    func newCoordinatings(_ coordinating: Coordinating)
+    func newCoordinatings(_ coordinatings: [Coordinating])
+    func presentController(_ controller: UIViewController)
+    func navigationPushController(_ controller: UIViewController)
 }

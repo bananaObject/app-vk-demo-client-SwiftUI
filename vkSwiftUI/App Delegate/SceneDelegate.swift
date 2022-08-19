@@ -5,7 +5,6 @@
 //  Created by Ke4a on 26.01.2022.
 //
 
-import SwiftUI
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -20,10 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let window = UIWindow(windowScene: windowScene)
-        let applicatyionCoordinator = ApplicationCoordinator(window)
-        applicatyionCoordinator.start()
-        
-        self.applicatyionCoordinator = applicatyionCoordinator
+        self.applicatyionCoordinator = ApplicationCoordinator(window)
+        self.applicatyionCoordinator?.start()
+
         window.makeKeyAndVisible()
     }
 }

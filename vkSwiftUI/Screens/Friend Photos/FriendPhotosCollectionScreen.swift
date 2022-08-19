@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FriendPhotosCollection: View {
+struct FriendPhotosCollectionScreen: View {
     var friend: FriendViewModel
 
     let columns = [
@@ -22,7 +22,7 @@ struct FriendPhotosCollection: View {
     }
 }
 
-extension FriendPhotosCollection {
+extension FriendPhotosCollectionScreen {
     private var collectionPhotos: some View {
         ScrollView {
             LazyVGrid(columns: columns) {
@@ -30,13 +30,12 @@ extension FriendPhotosCollection {
                     FriendPhotosCell()
                 }
             }
-            .navigationTitle("Photo \(friend.lastName) \(friend.firstName)")
         }
     }
 }
 
 struct FriendPhotosCollection_Previews: PreviewProvider {
     static var previews: some View {
-        FriendPhotosCollection(friend: FriendViewModel(id: 0, firstName: "Bery", lastName: "Jaaamr", image: nil))
+        FriendPhotosCollectionScreen(friend: FriendViewModel(id: 0, firstName: "Bery", lastName: "Jaaamr", image: nil))
     }
 }

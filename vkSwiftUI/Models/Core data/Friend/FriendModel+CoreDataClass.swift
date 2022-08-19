@@ -9,7 +9,6 @@
 import CoreData
 import Foundation
 
-
 @objc(FriendModel)
 public class FriendModel: NSManagedObject, Decodable {
     enum CodingKeys: String, CodingKey {

@@ -6,8 +6,8 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension FriendModel {
 
@@ -23,6 +23,4 @@ extension FriendModel {
 
 }
 
-extension FriendModel : Identifiable {
-
-}
+extension FriendModel: Identifiable { }
