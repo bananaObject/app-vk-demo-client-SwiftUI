@@ -18,7 +18,7 @@ class ApplicationCoordinator: Coordinator {
     init(_ window: UIWindow) {
         self.window = window
     }
-    
+
     func start() {
         let coordinator = ChooseCoordinator(self)
         coordinator.start()

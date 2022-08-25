@@ -53,8 +53,8 @@ extension FriendsListScreen {
     }
 }
 
-//struct FriendsListScreen_Previews: PreviewProvider {
+// struct FriendsListScreen_Previews: PreviewProvider {
 //    static var previews: some View {
 //        FriendsListScreen(FriendsViewModel(nil))
 //    }
-//}
+// }
