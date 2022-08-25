@@ -11,21 +11,21 @@ import SwiftUI
 
 protocol ApiLayer: RequestBase {
     var contex: NSManagedObjectContext? { get set }
-    func sendRequestList<T: Decodable>(
+    func sendRequest<T: Decodable>(
         endpoint: ApiEndpoint,
         responseModel: T.Type
-    ) async -> Result<ResponseList<T>, RequestError>
+    ) async -> Result<T, RequestError>
 }
 
 extension ApiLayer {
-    func sendRequestList<T: Decodable>(
+    func sendRequest<T: Decodable>(
         endpoint: ApiEndpoint,
         responseModel: T.Type
-    )async -> Result<ResponseList<T>, RequestError> {
+    )async -> Result<T, RequestError> {
         do {
             let data = try await requestBase(endpoint: endpoint)
             let decodeResult = try await self.decodeResponse(data: data, decodeModel: T.self)
-            return .success(decodeResult)
+            return .success(decodeResult.response)
         } catch let error as RequestError {
             return .failure(error)
         } catch {
@@ -33,9 +33,8 @@ extension ApiLayer {
         }
     }
 
-    private func decodeResponse<T: Decodable>(data: Data,
-                                              decodeModel: T.Type
-    ) async throws -> ResponseList<T> {
+    private func decodeResponse<T: Decodable>(data: Data, decodeModel: T.Type
+    ) async throws -> Response<T> {
         do {
             let decoder = JSONDecoder()
             decoder.userInfo[CodingUserInfoKey.managedObjectContext] = self.contex
@@ -44,14 +43,12 @@ extension ApiLayer {
                 with: data,
                 options: .mutableContainers
             ) as? [String: Any]
-            let responseJson: [String: Any]? = json?["response"] as? [String: Any]
-            let itemsTask = Task<[T], Error> {
-                let data = try JSONSerialization.data(withJSONObject: responseJson?["items"] as Any)
-                return try decoder.decode([T].self, from: data)
+            let itemTask = Task<Response<T>, Error> {
+                let data = try JSONSerialization.data(withJSONObject: json as Any)
+                return try decoder.decode(Response<T>.self, from: data)
             }
 
-            let items = try await itemsTask.value
-            return ResponseList(items)
+            return try await itemTask.value
         } catch {
             throw RequestError.decode
         }
@@ -60,7 +57,7 @@ extension ApiLayer {
 
 class Api: ApiLayer {
     var contex: NSManagedObjectContext?
-    init(_ context: NSManagedObjectContext?) {
+    init(_ context: NSManagedObjectContext? = nil) {
         self.contex = context
     }
 }

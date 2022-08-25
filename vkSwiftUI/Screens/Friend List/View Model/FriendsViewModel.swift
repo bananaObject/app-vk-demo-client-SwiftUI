@@ -52,10 +52,10 @@ class FriendsViewModel: NSObject, ObservableObject {
     func fetchFriends() {
         deleteAllInBd()
         Task {
-            let result = await api.sendRequestList(endpoint: .getFriends,
-                                                   responseModel: FriendModel.self)
+            let result = await api.sendRequest(endpoint: .getFriends,
+                                               responseModel: ListItems<FriendModel>.self)
             switch result {
-            case .success(_):
+            case .success:
                 try? context?.save()
             case .failure(let error):
                 print(error)
@@ -85,7 +85,7 @@ class FriendsViewModel: NSObject, ObservableObject {
         friends.forEach { friend in
             guard let character = friend.lastName.first else { return }
             let letter = String(character)
-            
+
             let viewModel = FriendViewModel(id: Int(friend.id),
                                             firstName: friend.firstName,
                                             lastName: friend.lastName,
@@ -113,28 +113,28 @@ extension FriendsViewModel: NSFetchedResultsControllerDelegate {
         section = convertToViewModels(new)
     }
 
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-//                    didChange anObject: Any,
-//                    at indexPath: IndexPath?,
-//                    for type: NSFetchedResultsChangeType,
-//                    newIndexPath: IndexPath?
-//    ) {
-//        guard let objects = anObject as? FriendModel, let character = objects.lastName.first else { return }
-//        let letter = String(character)
-//        guard let index = section[letter]?.firstIndex(where: { $0.id == objects.id }) else { return }
-//
-//        switch type {
-//        case .delete:
-//            section[letter]?.remove(at: index)
-//            if let sec = section[letter], sec.isEmpty {
-//                section.removeValue(forKey: letter)
-//            }
-//        case .update:
-//            section[letter]?[index] = convertToViewModels(objects)
-//            print(objects.lastName)
-//            print(section[letter]?[index].lastName)
-//        default:
-//            break
-//        }
-//    }
+    //    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+    //                    didChange anObject: Any,
+    //                    at indexPath: IndexPath?,
+    //                    for type: NSFetchedResultsChangeType,
+    //                    newIndexPath: IndexPath?
+    //    ) {
+    //        guard let objects = anObject as? FriendModel, let character = objects.lastName.first else { return }
+    //        let letter = String(character)
+    //        guard let index = section[letter]?.firstIndex(where: { $0.id == objects.id }) else { return }
+    //
+    //        switch type {
+    //        case .delete:
+    //            section[letter]?.remove(at: index)
+    //            if let sec = section[letter], sec.isEmpty {
+    //                section.removeValue(forKey: letter)
+    //            }
+    //        case .update:
+    //            section[letter]?[index] = convertToViewModels(objects)
+    //            print(objects.lastName)
+    //            print(section[letter]?[index].lastName)
+    //        default:
+    //            break
+    //        }
+    //    }
 }
