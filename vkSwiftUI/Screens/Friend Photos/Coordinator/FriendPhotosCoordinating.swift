@@ -17,7 +17,8 @@ class FriendPhotosCoordinating: Coordinating {
     }
 
     func start() {
-        let controller = UIHostingController(rootView: FriendPhotosCollectionScreen(friend: friend))
+        let viewModel = FriendPhotosViewModel(friend)
+        let controller = UIHostingController(rootView: FriendPhotosCollectionScreen(viewModel: viewModel))
         controller.modalPresentationStyle = .fullScreen
         controller.title = "Photos \(friend.firstName) \(friend.lastName)"
         applicationCoordinator.navigationPushController(controller)
