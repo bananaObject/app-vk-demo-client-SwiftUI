@@ -32,7 +32,8 @@ class LoginViewModel: NSObject, ObservableObject, WKNavigationDelegate, LoginVie
         saveToken(fragment)
 
         webViewIsShow = false
-        mainIsShow = true
+
+        self.mainIsShow = true
     }
 
     func buttonAction() {

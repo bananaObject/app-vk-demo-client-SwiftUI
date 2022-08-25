@@ -1,5 +1,5 @@
 //
-//  ChooseViewModel.swift
+//  OnboardingViewModel.swift
 //  vkSwiftUI
 //
 //  Created by Ke4a on 08.08.2022.
@@ -7,18 +7,16 @@
 
 import Foundation
 
-class ChooseViewModel: ObservableObject, RequestBase {
-    var loadIsCompleted: Bool = false {
-        didSet {
-            objectWillChange.send()
-        }
-    }
+class OnboardingViewModel: ObservableObject, RequestBase {
+    @Published var loadIsCompleted: Bool = false
 
     var tokenIsValid: Bool = false {
         didSet {
             loadIsCompleted = true
         }
     }
+
+    private var firstTime = true
 
     init() {}
 
@@ -31,13 +29,15 @@ class ChooseViewModel: ObservableObject, RequestBase {
         ) as? [String: Any]
 
         let result = json?.keys.contains("response") ?? false
-
         return result
     }
 
     func checkToken() {
-        Task { @MainActor in
-            tokenIsValid = try await requestCheckTokenAsync()
+        if firstTime {
+            Task { @MainActor in
+                tokenIsValid = try await requestCheckTokenAsync()
+            }
+            firstTime = false
         }
     }
 }

@@ -28,6 +28,7 @@ struct ListCell: View {
                         isShakeOn.toggle()
                     }
                 }
+
             Text(text)
                 .lineLimit(1)
                 .padding()

@@ -9,27 +9,24 @@ import CoreData
 import SwiftUI
 
 struct FriendsListScreen: View {
-    @ObservedObject var viewModel = FriendsViewModel()
-    
-    @Environment(\.managedObjectContext) private var context: NSManagedObjectContext
+    @ObservedObject var viewModel: FriendsViewModel
+
+    init(_ viewModel: FriendsViewModel ) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
-        NavigationView {
-            friendsList
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(trailing: EditButton())
-                .onAppear {
-                    if viewModel.firstTime {
-                        #warning("Пока при каждом запуске удаляются все данные из бд")
-                        #warning("так как еще не сделал обновление старых данных и нормальную работу core data")
-                        viewModel.setupContex(context)
-                        viewModel.setupCoredataController()
-                        viewModel.fetchFriends()
-                        #warning("Баг двойной запуск жизненого цикла фиксится только вот так")
-                        viewModel.firstTime.toggle()
-                    }
+        friendsList
+            .navigationBarItems(trailing: EditButton())
+            .onAppear {
+                if viewModel.firstTime {
+                    #warning("Пока при каждом запуске удаляются все данные из бд")
+                    #warning("так как еще не сделал обновление старых данных и нормальную работу core data")
+                    viewModel.fetchFriends()
+                    #warning("Баг двойной запуск жизненого цикла фиксится только вот так")
+                    viewModel.firstTime.toggle()
                 }
-        }
+            }
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
@@ -42,14 +39,12 @@ extension FriendsListScreen {
                     Section(name) {
                         if let section = viewModel.section[name] {
                             ForEach(section, id: \.id) { friend in
-                                NavigationLink {
-                                    FriendPhotosCollection(friend: friend)
-                                } label: {
-                                    ListCell(friend)
-                                }
+                                ListCell(friend)
+                                    .onTapGesture {
+                                        viewModel.selectedFriend = friend
+                                    }
                             }
                         }
-
                     }
                 }
             }
@@ -58,8 +53,8 @@ extension FriendsListScreen {
     }
 }
 
-struct FriendsListScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        FriendsListScreen()
-    }
-}
+//struct FriendsListScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FriendsListScreen(FriendsViewModel(nil))
+//    }
+//}
