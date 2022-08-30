@@ -7,8 +7,7 @@
 
 import Foundation
 
-/// Дженерик ответ  сервера.
-final class ResponseItem<T: Decodable>: Decodable {
+final class Response<T: Decodable>: Decodable {
     let response: T
 
     private enum CodingKeys: String, CodingKey {
@@ -16,14 +15,10 @@ final class ResponseItem<T: Decodable>: Decodable {
     }
 }
 
-/// Дженерик ответ  сервера  api для списка.
-final class ResponseList<T: Decodable> {
+final class ListItems<T: Decodable>: Decodable {
     let items: [T]
 
-    init(
-        _ items: [T],
-        _ nextFrom: String? = nil
-    ) {
-        self.items = items
+    private enum CodingKeys: String, CodingKey {
+        case items
     }
 }

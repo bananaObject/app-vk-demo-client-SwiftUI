@@ -8,26 +8,30 @@
 import SwiftUI
 
 struct FriendPhotosCollectionScreen: View {
-    var friend: FriendViewModel
+    @ObservedObject var viewModel: FriendPhotosViewModel
 
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
+    let columns: [GridItem] = [
+        .init(.adaptive(minimum: 100, maximum: .infinity), spacing: 4, alignment: .center)
     ]
 
     var body: some View {
         collectionPhotos
             .padding([.leading, .trailing], 10)
-            .padding([.top], 5)
+            .padding([.top], 4)
+            .onAppear {
+                viewModel.fetchPhotos()
+            }
     }
 }
 
 extension FriendPhotosCollectionScreen {
     private var collectionPhotos: some View {
         ScrollView {
-            LazyVGrid(columns: columns) {
-                ForEach(0...10, id: \.self) { _ in
-                    FriendPhotosCell()
+            LazyVGrid(columns: columns, spacing: 4) {
+                ForEach( 0..<viewModel.viewModels.count, id: \.self) { index in
+                    let model = viewModel.viewModels[index]
+
+                    FriendPhotosCell(photo: model, index: index, likeAction: viewModel.likeAction)
                 }
             }
         }
@@ -36,6 +40,8 @@ extension FriendPhotosCollectionScreen {
 
 struct FriendPhotosCollection_Previews: PreviewProvider {
     static var previews: some View {
-        FriendPhotosCollectionScreen(friend: FriendViewModel(id: 0, firstName: "Bery", lastName: "Jaaamr", image: nil))
+        Group {
+            // FriendPhotosCollectionScreen()
+        }
     }
 }

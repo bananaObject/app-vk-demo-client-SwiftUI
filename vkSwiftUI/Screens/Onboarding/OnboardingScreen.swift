@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OnboardingScreen: View {
     weak var viewModel: OnboardingViewModel?
-    
+
     var body: some View {
         loadingView
             .onAppear {

@@ -24,15 +24,18 @@ class OnboardingCoordinating: Coordinating {
         let view = OnboardingScreen(viewModel: self.viewModel)
         self.controller = UIHostingController(rootView: view)
 
-        self.viewModel.$loadIsCompleted.subscribe(on: RunLoop.main).sink { [weak self] loadIsCompleted in
-            guard let self = self else { return }
+        self.viewModel.$loadIsCompleted
+            .subscribe(on: RunLoop.main)
+            .sink { [weak self] loadIsCompleted in
+                guard let self = self else { return }
 
-            if loadIsCompleted && self.viewModel.tokenIsValid {
-                self.openMainScreen()
-            } else if loadIsCompleted {
-                self.openLoginScreen()
+                if loadIsCompleted && !self.viewModel.tokenIsValid {
+                    self.openMainScreen()
+                } else if loadIsCompleted {
+                    self.openLoginScreen()
+                }
             }
-        }.store(in: &self.cancellables)
+            .store(in: &self.cancellables)
     }
 
     private func openLoginScreen() {

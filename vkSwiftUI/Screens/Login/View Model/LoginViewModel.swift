@@ -13,7 +13,7 @@ protocol LoginViewModelInput {
 }
 
 class LoginViewModel: NSObject, ObservableObject, WKNavigationDelegate, LoginViewModelInput {
-    @Published var webViewIsShow: Bool = false 
+    @Published var webViewIsShow: Bool = false
     @Published var mainIsShow: Bool = false
 
     func webView(

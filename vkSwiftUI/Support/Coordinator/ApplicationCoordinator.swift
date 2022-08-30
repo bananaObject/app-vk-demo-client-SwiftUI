@@ -4,7 +4,7 @@
 //
 //  Created by Ke4a on 18.08.2022.
 //
-import SwiftUI
+
 import UIKit
 
 class ApplicationCoordinator: Coordinator {
@@ -42,9 +42,15 @@ class ApplicationCoordinator: Coordinator {
 
     func navigationPushController(_ controller: UIViewController) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            guard let vc = self?.controller as? UITabBarController,
-            let currentVc = vc.selectedViewController as? UINavigationController else { return }
-            currentVc.pushViewController(controller, animated: true)
+            let currentVc: UINavigationController?
+
+            if let tabBarController = self?.controller as? UITabBarController {
+                currentVc = tabBarController.selectedViewController as? UINavigationController
+            } else {
+                currentVc = controller as? UINavigationController
+            }
+
+            currentVc?.pushViewController(controller, animated: true)
         }
     }
 }

@@ -14,6 +14,20 @@ enum StartNewsRequest {
     case none
 }
 
+enum LikeType: String {
+    case post
+    case comment
+    case photo
+    case audio
+    case video
+    case note
+    case market
+    case photoComment = "photo_comment"
+    case videoComment = "video_comment"
+    case topicComment = "topic_comment"
+    case marketComment = "market_comment"
+}
+
 enum ApiEndpoint {
     case getFriends
     case getPhotos(userId: Int)
@@ -22,6 +36,8 @@ enum ApiEndpoint {
     case getCatalogGroups
     case getNews(StartNewsRequest)
     case getUser
+    case addLike(type: LikeType, ownerId: Int, itemId: Int)
+    case deleteLike(type: LikeType, ownerId: Int, itemId: Int)
 }
 
 extension ApiEndpoint: EndpointBase {
@@ -55,6 +71,11 @@ extension ApiEndpoint: EndpointBase {
             base.append(.init(name: "owner_id", value: String(id)))
             base.append(.init(name: "album_id", value: "profile"))
             base.append(.init(name: "extended", value: "1"))
+        case .addLike(type: let type, ownerId: let owner, itemId: let id),
+                .deleteLike(type: let type, ownerId: let owner, itemId: let id):
+            base.append(.init(name: "type", value: type.rawValue))
+            base.append(.init(name: "owner_id", value: String(owner)))
+            base.append(.init(name: "item_id", value: String(id)))
         case .getCatalogGroups, .getUser:
             break
         }
@@ -78,6 +99,10 @@ extension ApiEndpoint: EndpointBase {
             return "/method/newsfeed.get"
         case .getUser:
             return "/method/users.get"
+        case .addLike:
+            return "/method/likes.add"
+        case .deleteLike:
+            return "/method/likes.delete"
         }
     }
 
