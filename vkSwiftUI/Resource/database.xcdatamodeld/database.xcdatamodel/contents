@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G72" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="FriendModel" representedClassName="FriendModel" syncable="YES">
         <attribute name="avatar" attributeType="String"/>
         <attribute name="firstName" attributeType="String"/>
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lastName" attributeType="String"/>
-        <attribute name="online" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="online" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <elements>
-        <element name="FriendModel" positionX="-360.9140625" positionY="-100.3828125" width="128" height="104"/>
-    </elements>
 </model>

@@ -5,55 +5,59 @@
 //  Created by Ke4a on 15.08.2022.
 //
 
+import Combine
 import SwiftUI
 
 struct FriendPhotosCell: View {
-    var photo: FriendPhotoViewModel
-    var index: Int
-    var likeAction: (Int) -> Void
-   
+    @State var isLike: Bool
+    var imageData: Data?
+    var indexPath: (section: Int, item: Int)
+    var likeSubject: PassthroughSubject<LikeRequest, Never>
+    @State var test = true
     var body: some View {
         ZStack(alignment: .bottom) {
-            friendPhoto
             GeometryReader { geo in
+                imageView
+                    .frame(width: geo.size.width,
+                           height: geo.size.height,
+                           alignment: .center)
+                    .clipped()
                 likePhoto
-                    .offset(x: geo.size.width - 30,
-                            y: geo.size.height - 30)
+                    .frame(maxWidth: geo.size.width * 0.15,
+                           maxHeight: geo.size.height * 0.15)
+                    .offset(x: geo.size.width * 0.8,
+                            y: geo.size.height * 0.8)
             }
         }
     }
 }
 
 extension FriendPhotosCell {
-    private var friendPhoto: some View {
-        AsyncImage(url: URL(string: photo.url)) { image in
-            image
-                .resizable()
-                .scaledToFill()
-                .frame(minWidth: 0, minHeight: 0, alignment: .center)
-                .aspectRatio(1, contentMode: .fit)
-                .contentShape(Rectangle())
-                .clipped()
-
-        } placeholder: {
-            Image(systemName: "photo")
-                .imageScale(.large)
-                .frame(width: 100, height: 100)
+    private var imageView: some View {
+        Group {
+            if let data = imageData, let image = UIImage(data: data) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+            } else {
+                ActivityIndicator(isAnimating: $test, style: .medium)
+                    .color(.darkGray)
+            }
         }
     }
     
     private var likePhoto: some View {
         Image("like")
             .resizable()
-            .frame(maxWidth: 25, maxHeight: 25)
-            .scaleEffect(photo.likes ? 1.33 : 1)
-            .foregroundColor(photo.likes ? .red : .gray)
-            .rotation3DEffect(.degrees(photo.likes ? 180 : 0), axis: (x: 0, y: 1, z: 0))
-            .animation(.easeInOut(duration: 0.33), value: photo.likes)
+            .scaleEffect(isLike ? 1.1 : 1)
+            .foregroundColor(isLike ? .red : .gray)
+            .rotation3DEffect(.degrees(isLike ? 180 : 0), axis: (x: 0, y: 1, z: 0))
+            .animation(.easeInOut(duration: 0.33), value: isLike)
             .onTapGesture {
-                withAnimation(.easeIn(duration: 0.5)) {
-                    likeAction(index)
-                }
+                isLike.toggle()
+                likeSubject.send(.init(section: indexPath.section,
+                                       item: indexPath.item,
+                                       isLike: isLike))
             }
     }
 }

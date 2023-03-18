@@ -12,4 +12,5 @@ struct FriendViewModel {
     let firstName: String
     let lastName: String
     let image: URL?
+    var imageData: Data?
 }

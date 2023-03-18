@@ -9,29 +9,42 @@ import SwiftUI
 import UIKit
 
 class OnboardingCoordinating: Coordinating {
+    // MARK: - Public Properties
+
     private(set) var controller: UIViewController?
 
-    private let viewModel: OnboardingViewModel = .init()
+    // MARK: - Private Properties
+
+    private let viewModel = OnboardingViewModel()
     private var cancellables: Set<AnyCancellable> = []
 
     private var applicationCoordinator: Coordinator
+
+    // MARK: - Initialization
 
     init(_ appCordinator: Coordinator) {
         self.applicationCoordinator = appCordinator
     }
 
+    // MARK: - Public Methods
+
     func start() {
         let view = OnboardingScreen(viewModel: self.viewModel)
         self.controller = UIHostingController(rootView: view)
+        configureRx()
+    }
 
-        self.viewModel.$loadIsCompleted
-            .subscribe(on: RunLoop.main)
-            .sink { [weak self] loadIsCompleted in
+    // MARK: - Private Methods
+
+    private func configureRx() {
+        self.viewModel.tokenIsValidPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] isValid in
                 guard let self = self else { return }
 
-                if loadIsCompleted && !self.viewModel.tokenIsValid {
+                if isValid {
                     self.openMainScreen()
-                } else if loadIsCompleted {
+                } else {
                     self.openLoginScreen()
                 }
             }

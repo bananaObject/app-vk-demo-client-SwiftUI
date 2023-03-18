@@ -10,21 +10,29 @@ import SwiftUI
 import UIKit
 
 class FriendsCoordinating: Coordinating {
+    // MARK: - Public Properties
+
     var controller: UIViewController?
-    
+
+    // MARK: - Private Properties
+
     private var applicationCoordinator: Coordinator
     private var cancellables: Set<AnyCancellable> = []
     
     private let viewModel: FriendsViewModel
-    
+
+    // MARK: - Initialization
+
     init(_ appCordinator: Coordinator) {
         self.applicationCoordinator = appCordinator
         let context = Persistence()
             .container
             .viewContext
-        self.viewModel = FriendsViewModel(context)
+        self.viewModel = FriendsViewModel(context, api: NetworkApi(), imageLoader: ImageLoader())
     }
-    
+
+    // MARK: - Public Methods
+
     func start() {
         let item = UITabBarItem(title: "Friends",
                                 image: UIImage(systemName: "person.2"),
@@ -33,20 +41,36 @@ class FriendsCoordinating: Coordinating {
         self.controller = UIHostingController(rootView: FriendsListScreen(viewModel))
         self.controller?.title = "Friends"
         self.controller?.tabBarItem = item
-        
-        viewModel.$selectedFriend
-            .subscribe(on: RunLoop.main)
+
+        configureRx()
+    }
+
+    // MARK: - Private Methods
+    
+    private func configureRx() {
+        viewModel.selectedFriendPublisher
+            .receive(on: RunLoop.main)
             .sink { [weak self] friend in
-                guard let friend = friend
-                else { return }
-                
                 self?.openFriendPhotosScreen(friend)
             }
             .store(in: &cancellables)
+
+        viewModel.logoutPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.openLogin()
+            }
+            .store(in: &cancellables)
     }
-    
+
     private func openFriendPhotosScreen(_ friend: FriendViewModel) {
         let coordinating = FriendPhotosCoordinating(applicationCoordinator, friend: friend)
+        coordinating.start()
+    }
+
+    private func openLogin() {
+        let coordinating = LoginCoordinating(applicationCoordinator)
+        applicationCoordinator.newCoordinatings(coordinating)
         coordinating.start()
     }
 }

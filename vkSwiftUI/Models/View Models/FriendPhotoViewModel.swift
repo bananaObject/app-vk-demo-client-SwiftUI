@@ -13,4 +13,5 @@ struct FriendPhotoViewModel {
     var ownerId: Int
     var albumId: Int
     var likes: Bool
+    var imageData: Data?
 }

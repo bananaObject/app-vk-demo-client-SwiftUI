@@ -38,6 +38,7 @@ enum ApiEndpoint {
     case getUser
     case addLike(type: LikeType, ownerId: Int, itemId: Int)
     case deleteLike(type: LikeType, ownerId: Int, itemId: Int)
+    case deleteFriends(id: Int)
 }
 
 extension ApiEndpoint: EndpointBase {
@@ -78,6 +79,8 @@ extension ApiEndpoint: EndpointBase {
             base.append(.init(name: "item_id", value: String(id)))
         case .getCatalogGroups, .getUser:
             break
+        case .deleteFriends(id: let id):
+            base.append(.init(name: "user_id", value: String(id)))
         }
 
         return base
@@ -103,6 +106,8 @@ extension ApiEndpoint: EndpointBase {
             return "/method/likes.add"
         case .deleteLike:
             return "/method/likes.delete"
+        case .deleteFriends:
+            return "/method/friends.delete"
         }
     }
 

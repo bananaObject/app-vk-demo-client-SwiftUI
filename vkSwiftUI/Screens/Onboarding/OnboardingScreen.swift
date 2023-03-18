@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OnboardingScreen: View {
     weak var viewModel: OnboardingViewModel?
+    @State private var isAnimating = true
 
     var body: some View {
         loadingView
@@ -19,19 +20,18 @@ struct OnboardingScreen: View {
 }
 
 extension OnboardingScreen {
-    var loadingView: some View {
-        VStack {
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                .scaleEffect(1.5)
-        }
-        .frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-        .background(Color.main)
+    private var loadingView: some View {
+        ActivityIndicator(isAnimating: $isAnimating, style: .large)
+            .color(.white)
+            .frame( maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.main)
+            .edgesIgnoringSafeArea(.all)
+
     }
 }
 
 struct OnboardingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingScreen(viewModel: OnboardingViewModel())
+        OnboardingScreen(viewModel: nil)
     }
 }

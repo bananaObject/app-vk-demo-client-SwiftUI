@@ -2,12 +2,11 @@
 //  FriendModel+CoreDataProperties.swift
 //  vkSwiftUI
 //
-//  Created by Ke4a on 11.08.2022.
+//  Created by Ke4a on 16.03.2023.
 //
 //
 
 import CoreData
-import Foundation
 
 extension FriendModel {
 
@@ -19,7 +18,7 @@ extension FriendModel {
     @NSManaged public var firstName: String
     @NSManaged public var id: Int32
     @NSManaged public var lastName: String
-    @NSManaged public var online: Int32
+    @NSManaged public var online: Bool
 
 }
 
