@@ -10,31 +10,55 @@ import SwiftUI
 struct FriendPhotosCollectionScreen: View {
     @ObservedObject var viewModel: FriendPhotosViewModel
 
-    let columns: [GridItem] = [
-        .init(.adaptive(minimum: 100, maximum: .infinity), spacing: 4, alignment: .center)
-    ]
-
     var body: some View {
-        collectionPhotos
-            .padding([.leading, .trailing], 10)
-            .padding([.top], 4)
-            .onAppear {
-                viewModel.fetchPhotos()
+        Group {
+            if viewModel.isLoading {
+                LoadingView()
+            } else {
+                collectionPhotos
             }
+        }
+        .onAppear {
+            viewModel.fetchPhotos()
+        }
     }
 }
 
 extension FriendPhotosCollectionScreen {
     private var collectionPhotos: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 4) {
-                ForEach( 0..<viewModel.viewModels.count, id: \.self) { index in
-                    let model = viewModel.viewModels[index]
+        let spacing: Double = 4
 
-                    FriendPhotosCell(photo: model, index: index, likeAction: viewModel.likeAction)
+        return GeometryReader { geo in
+            List {
+                ForEach(viewModel.viewModels.indices, id: \.self) { section in
+                    HStack(spacing: spacing) {
+                        ForEach(viewModel.viewModels[section].indices, id: \.self) { index in
+                            let model = viewModel.viewModels[section][index]
+                            FriendPhotosCell(isLike: model.likes, imageData: model.imageData,
+                                             indexPath: (section: section, item: index),
+                                             likeSubject: viewModel.likeIndexSubject)
+                                .frame(width: calcWidthCell(geo.size.width,
+                                                            spacing,
+                                                            viewModel.qtItemsInSection),
+                                       height: calcWidthCell(geo.size.width,
+                                                             spacing,
+                                                             viewModel.qtItemsInSection))
+                                .onAppear {
+                                    viewModel.loadImage(section: section, index: index)
+                                }
+                        }
+                        Spacer(minLength: 0)
+                    }
+                    .listRowInsets(.init(top: spacing / 2, leading: spacing, bottom: spacing / 2, trailing: -spacing))
                 }
             }
+            .listStyle(.plain)
         }
+    }
+
+    private func calcWidthCell(_ widthScreen: Double, _ spacing: Double, _ qt: Int) -> Double {
+        let spacing = spacing * Double(2 + qt - 1)
+        return (widthScreen - spacing) / Double(qt)
     }
 }
 

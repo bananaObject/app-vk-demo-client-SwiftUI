@@ -1,28 +1,20 @@
 //
-//  RequestBase.swift
-//  vk-withoutStoryboard
+//  ImageLoader.swift
+//  vkSwiftUI
 //
-//  Created by Ke4a on 19.05.2022.
+//  Created by Ke4a on 17.03.2023.
 //
 
 import Foundation
 
-protocol RequestBase {
-    func requestBase(endpoint: ApiEndpoint) async throws -> Data
+protocol ImageLoaderProtocol {
+    func loadPhotoAsync(_ url: URL) async throws -> Data
 }
 
-extension RequestBase {
-    func requestBase(endpoint: ApiEndpoint) async throws -> Data {
-        var urlComponents: URLComponents = endpoint.baseURL
-        urlComponents.path = endpoint.path
-        urlComponents.queryItems = endpoint.params
-
-        guard let url: URL = urlComponents.url else {
-            throw RequestError.invalidURL
-        }
-
+class ImageLoader: ImageLoaderProtocol {
+    func loadPhotoAsync(_ url: URL) async throws -> Data {
         var request = URLRequest(url: url)
-        request.httpMethod = endpoint.method.rawValue
+        request.httpMethod = "GET"
 
         do {
             let (data, response) = try await URLSession.shared.data(for: request)

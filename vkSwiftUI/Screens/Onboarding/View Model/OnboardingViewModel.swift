@@ -5,20 +5,35 @@
 //  Created by Ke4a on 08.08.2022.
 //
 
+import Combine
 import Foundation
 
-class OnboardingViewModel: ObservableObject, RequestBase {
-    @Published var loadIsCompleted: Bool = false
+class OnboardingViewModel: RequestBase {
+    // MARK: - Public Properties
 
-    var tokenIsValid: Bool = false {
-        didSet {
-            loadIsCompleted = true
+    var tokenIsValidPublisher: AnyPublisher<Bool, Never> {
+        tokenIsValidSubject.eraseToAnyPublisher()
+    }
+
+    // MARK: - Private Properties
+
+    private let tokenIsValidSubject = PassthroughSubject<Bool, Never>()
+
+    // MARK: - Public Methods
+
+    func checkToken() {
+        Task.detached { @MainActor [weak self] in
+            guard let self else { return }
+
+            do {
+                self.tokenIsValidSubject.send(try await self.requestCheckTokenAsync())
+            } catch {
+                self.tokenIsValidSubject.send(false)
+            }
         }
     }
 
-    private var firstTime = true
-
-    init() {}
+    // MARK: - Private Methods
 
     private func requestCheckTokenAsync() async throws -> Bool {
         let data = try await requestBase(endpoint: .getUser)
@@ -30,14 +45,5 @@ class OnboardingViewModel: ObservableObject, RequestBase {
 
         let result = json?.keys.contains("response") ?? false
         return result
-    }
-
-    func checkToken() {
-        if firstTime {
-            Task { @MainActor in
-                tokenIsValid = try await requestCheckTokenAsync()
-            }
-            firstTime = false
-        }
     }
 }

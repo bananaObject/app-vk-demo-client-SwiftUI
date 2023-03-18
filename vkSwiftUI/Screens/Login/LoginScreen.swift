@@ -14,12 +14,6 @@ struct LoginScreen: View {
     private let safeAreaPadding: CGFloat = 8
 
     var body: some View {
-        login
-    }
-}
-
-extension LoginScreen {
-    private var login: some View {
         VStack {
             Spacer()
             logoImage
@@ -28,10 +22,14 @@ extension LoginScreen {
         }
         .padding([.trailing, .leading], safeAreaPadding)
         .background(mainColor)
+        .edgesIgnoringSafeArea(.all)
         .sheet(isPresented: $viewModel.webViewIsShow) {
             LoginWebView(viewModel: viewModel)
         }
     }
+}
+
+extension LoginScreen {
     private var logoImage: some View {
         Image("vkLogo")
             .resizable()
@@ -46,9 +44,9 @@ extension LoginScreen {
         Button(action: viewModel.buttonAction) {
             Text("Войти")
                 .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
-                .background(.white)
+                .foregroundColor(mainColor)
+                .background(Color.white)
                 .cornerRadius(8)
-                .tint(mainColor)
         }
     }
 }

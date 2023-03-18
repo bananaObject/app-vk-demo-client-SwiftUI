@@ -9,13 +9,18 @@ import SwiftUI
 import UIKit
 
 class MainCoordinating: Coordinating {
-    private var applicationCoordinator: Coordinator
+    // MARK: - Private Properties
 
+    private var applicationCoordinator: Coordinator
     private var childCoordinating: [Coordinating] = []
+
+    // MARK: - Initialization
 
     init(_ appCordinator: Coordinator) {
         self.applicationCoordinator = appCordinator
     }
+
+    // MARK: - Public Methods
 
     func start() {
         let controller = UITabBarController()
@@ -24,18 +29,20 @@ class MainCoordinating: Coordinating {
         controller.modalPresentationStyle = .fullScreen
         controller.setViewControllers([
             createFriendController(),
-            createEmptyController("News", "newspaper"),
-            createEmptyController("Groups", "person.3")], animated: false)
+            createStubController("News", "newspaper"),
+            createStubController("Groups", "person.3")], animated: false)
 
         applicationCoordinator.presentController(controller)
         applicationCoordinator.newCoordinatings(childCoordinating)
     }
 
-    private func createEmptyController(_ name: String, _ imageName: String) -> UINavigationController {
+    // MARK: - Private Methods
+
+    private func createStubController(_ name: String, _ imageName: String) -> UINavigationController {
         let item = UITabBarItem(title: name,
                                 image: UIImage(systemName: imageName),
                                 selectedImage: UIImage(systemName: "\(imageName).fill"))
-        let controller = UIHostingController(rootView: EmptyView())
+        let controller = UIHostingController(rootView: StubView())
         controller.title = name
         controller.tabBarItem = item
 

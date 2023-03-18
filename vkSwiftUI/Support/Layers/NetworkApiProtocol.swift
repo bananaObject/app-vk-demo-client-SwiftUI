@@ -6,18 +6,16 @@
 //
 
 import CoreData
-import Foundation
 import SwiftUI
 
-protocol ApiLayer: RequestBase {
-    var contex: NSManagedObjectContext? { get set }
+protocol NetworkApiProtocol: RequestBase {
     func sendRequest<T: Decodable>(
         endpoint: ApiEndpoint,
         responseModel: T.Type
     ) async -> Result<T, RequestError>
 }
 
-extension ApiLayer {
+extension NetworkApiProtocol {
     func sendRequest<T: Decodable>(
         endpoint: ApiEndpoint,
         responseModel: T.Type
@@ -37,7 +35,6 @@ extension ApiLayer {
     ) async throws -> Response<T> {
         do {
             let decoder = JSONDecoder()
-            decoder.userInfo[CodingUserInfoKey.managedObjectContext] = self.contex
 
             let json: [String: Any]? = try JSONSerialization.jsonObject(
                 with: data,
@@ -55,9 +52,4 @@ extension ApiLayer {
     }
 }
 
-class Api: ApiLayer {
-    var contex: NSManagedObjectContext?
-    init(_ context: NSManagedObjectContext? = nil) {
-        self.contex = context
-    }
-}
+class NetworkApi: NetworkApiProtocol {}

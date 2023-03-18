@@ -17,44 +17,57 @@ struct FriendsListScreen: View {
 
     var body: some View {
         friendsList
-            .navigationBarItems(trailing: EditButton())
+            .navigationBarItems(leading: logoutButton)
             .onAppear {
-                if viewModel.firstTime {
-                    #warning("Пока при каждом запуске удаляются все данные из бд")
-                    #warning("так как еще не сделал обновление старых данных и нормальную работу core data")
-                    viewModel.fetchFriends()
-                    #warning("Баг двойной запуск жизненого цикла фиксится только вот так")
-                    viewModel.firstTime.toggle()
-                }
+                viewModel.fetchFriends()
             }
-        .navigationViewStyle(StackNavigationViewStyle())
+            .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
 extension FriendsListScreen {
-    var friendsList: some View {
-        VStack {
-            List {
-                ForEach(viewModel.letter, id: \.self) { name in
-                    Section(name) {
-                        if let section = viewModel.section[name] {
-                            ForEach(section, id: \.id) { friend in
+    private var logoutButton: some View {
+        Button("Logout") {
+            viewModel.logout()
+        }
+        .foregroundColor(.red)
+    }
+
+    private var friendsList: some View {
+        Group {
+            if viewModel.isLoading {
+                LoadingView()
+            } else {
+                List {
+                    ForEach(viewModel.letter, id: \.self) { key in
+                        if let section =
+                            viewModel.sections[key] {
+                            Text(key)
+                                .font(Font.body.bold())
+                                .opacity(0.33)
+                            ForEach(Array(section.enumerated()), id: \.offset) { index, friend in
                                 ListCell(friend)
                                     .onTapGesture {
-                                        viewModel.selectedFriend = friend
+                                        viewModel.openFriendScreen(friend)
                                     }
+                                    .onAppear {
+                                        viewModel.loadImage(key: key, index: index)
+                                    }
+                            }
+                            .onDelete { index in
+                                viewModel.deleteFriend(key: key, index: index)
                             }
                         }
                     }
                 }
+                .listStyle(.plain)
             }
-            .listStyle(.inset)
         }
     }
 }
 
-// struct FriendsListScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FriendsListScreen(FriendsViewModel(nil))
-//    }
-// }
+struct FriendsListScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        FriendsListScreen(FriendsViewModel(nil, api: nil, imageLoader: nil))
+    }
+}

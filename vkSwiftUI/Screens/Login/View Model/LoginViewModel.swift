@@ -5,40 +5,29 @@
 //  Created by Ke4a on 07.08.2022.
 //
 
+import Combine
 import SwiftUI
 import WebKit
 
-protocol LoginViewModelInput {
-    var webViewIsShow: Bool { get }
-}
+class LoginViewModel: NSObject, ObservableObject {
+    // MARK: - Public Properties
 
-class LoginViewModel: NSObject, ObservableObject, WKNavigationDelegate, LoginViewModelInput {
-    @Published var webViewIsShow: Bool = false
-    @Published var mainIsShow: Bool = false
-
-    func webView(
-        _ webView: WKWebView,
-        decidePolicyFor navigationResponse: WKNavigationResponse,
-        decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void
-    ) {
-        guard let url: URL = navigationResponse.response.url, url.path == "/blank.html",
-              let fragment = url.fragment else {
-            decisionHandler(.allow)
-            return
-        }
-
-        decisionHandler(.cancel)
-
-        saveToken(fragment)
-
-        webViewIsShow = false
-
-        self.mainIsShow = true
+    var mainIsShowPublisher: AnyPublisher<Void, Never> {
+        mainIsShowSubject.eraseToAnyPublisher()
     }
+    @Published var webViewIsShow: Bool = false
+
+    // MARK: - Private Properties
+
+    private var mainIsShowSubject = PassthroughSubject<Void, Never>()
+
+    // MARK: - Public Methods
 
     func buttonAction() {
        webViewIsShow = true
     }
+
+    // MARK: - Private Methods
 
     private func saveToken(_ fragment: String) {
         // Received parameters from WebView response
@@ -58,5 +47,29 @@ class LoginViewModel: NSObject, ObservableObject, WKNavigationDelegate, LoginVie
             KeychainLayer.shared.set(token, key: .token)
             KeychainLayer.shared.set(id, key: .id)
         }
+    }
+}
+
+// MARK: - WKNavigationDelegate
+
+extension LoginViewModel: WKNavigationDelegate {
+    func webView(
+        _ webView: WKWebView,
+        decidePolicyFor navigationResponse: WKNavigationResponse,
+        decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void
+    ) {
+        guard let url: URL = navigationResponse.response.url, url.path == "/blank.html",
+              let fragment = url.fragment else {
+            decisionHandler(.allow)
+            return
+        }
+
+        decisionHandler(.cancel)
+
+        saveToken(fragment)
+
+        webViewIsShow = false
+
+        mainIsShowSubject.send()
     }
 }
