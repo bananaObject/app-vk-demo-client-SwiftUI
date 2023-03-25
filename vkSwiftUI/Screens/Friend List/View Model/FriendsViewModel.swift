@@ -52,13 +52,15 @@ class FriendsViewModel: NSObject, ObservableObject {
     // MARK: - Public Methods
 
     func openFriendScreen(_ friend: FriendViewModel) {
+        guard !friend.notAvailable else { return }
+        
         selectedFriendSubject.send(friend)
     }
 
     func logout() {
-        Task { @MainActor in
-            await removeAllUserData()
-            self.logoutSubject.send()
+        Task(priority: .userInitiated) { [weak self] in
+            await self?.removeAllUserData()
+            self?.logoutSubject.send()
         }
     }
 
@@ -94,18 +96,19 @@ class FriendsViewModel: NSObject, ObservableObject {
 
     func deleteFriend(key: String, index: IndexSet) {
         index.forEach { index in
-            Task(priority: .utility) {
-                guard let id = sections[key]?[index].id,
-                      let api else { return }
+            guard let id = sections[key]?[index].id,
+                  let api else { return }
+            if let friendBd = fetchController?.fetchedObjects?.first(where: { $0.id == id }) {
+                context?.delete(friendBd)
+                try? context?.save()
+            }
 
+            Task(priority: .utility) {
                 let result = await api.sendRequest(endpoint: .deleteFriends(id: id),
-                                                   responseModel: Response<ResponseSuccess>.self)
+                                                   responseModel: ResponseSuccess.self)
                 switch result {
                 case .success:
-                    if let friendBd = fetchController?.fetchedObjects?.first(where: { $0.id == id }) {
-                        context?.delete(friendBd)
-                        try context?.save()
-                    }
+                    break
                 case .failure(let failure):
                     print(failure)
                 }
@@ -137,7 +140,8 @@ class FriendsViewModel: NSObject, ObservableObject {
             let viewModel = FriendViewModel(id: Int(friend.id),
                                             firstName: friend.firstName,
                                             lastName: friend.lastName,
-                                            image: URL(string: friend.avatar))
+                                            image: URL(string: friend.avatar),
+                                            notAvailable: friend.notAvailable)
             var oldValue = section[letter] ?? []
             oldValue.append(viewModel)
 
@@ -156,22 +160,25 @@ class FriendsViewModel: NSObject, ObservableObject {
         FriendViewModel(id: Int(friend.id),
                         firstName: friend.firstName,
                         lastName: friend.lastName,
-                        image: URL(string: friend.avatar))
+                        image: URL(string: friend.avatar),
+                        notAvailable: friend.notAvailable)
     }
 
     private func removeAllUserData() async {
-        do {
-            try self.context?.execute(FriendModel.deleteAllEntityRequest())
-        } catch {
-           print(error)
-        }
-        KeychainLayer.shared.delete(.id)
-        KeychainLayer.shared.delete(.token)
+        Task { @MainActor [weak self] in
+            do {
+                try self?.context?.execute(FriendModel.deleteAllEntityRequest())
+            } catch {
+               print(error)
+            }
+            KeychainLayer.shared.delete(.id)
+            KeychainLayer.shared.delete(.token)
 
-        let dataStore = WKWebsiteDataStore.default()
-        let dataTypes = Set([WKWebsiteDataTypeCookies])
-        let date = Date.distantPast
-        await dataStore.removeData(ofTypes: dataTypes, modifiedSince: date)
+            let dataStore = WKWebsiteDataStore.default()
+            let dataTypes = Set([WKWebsiteDataTypeCookies])
+            let date = Date.distantPast
+            await dataStore.removeData(ofTypes: dataTypes, modifiedSince: date)
+        }
     }
 
     private func updateDB(_ newData: [ResponseFriendModel]) {

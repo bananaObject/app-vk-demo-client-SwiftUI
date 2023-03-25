@@ -37,6 +37,10 @@ public class FriendModel: NSManagedObject {
         if  self.avatar != data.avatar {
             self.avatar = data.avatar
         }
+
+        if  self.notAvailable != (data.deactivated != nil) {
+            self.notAvailable.toggle()
+        }
     }
 
     static func deleteAllEntityRequest() -> NSBatchDeleteRequest {

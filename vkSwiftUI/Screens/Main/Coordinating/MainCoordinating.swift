@@ -27,10 +27,10 @@ class MainCoordinating: Coordinating {
         controller.tabBar.tintColor = .main
         controller.tabBar.backgroundColor = .white
         controller.modalPresentationStyle = .fullScreen
-        controller.setViewControllers([
-            createFriendController(),
-            createStubController("News", "newspaper"),
-            createStubController("Groups", "person.3")], animated: false)
+        controller.setViewControllers([createFriendController(),
+                                       createStubController("News", "house"),
+                                       createStubController("Groups", "person.3")],
+                                      animated: false)
 
         applicationCoordinator.presentController(controller)
         applicationCoordinator.newCoordinatings(childCoordinating)
