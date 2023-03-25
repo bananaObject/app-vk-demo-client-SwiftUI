@@ -19,7 +19,7 @@ extension FriendModel {
     @NSManaged public var id: Int32
     @NSManaged public var lastName: String
     @NSManaged public var online: Bool
-
+    @NSManaged public var notAvailable: Bool
 }
 
 extension FriendModel: Identifiable { }

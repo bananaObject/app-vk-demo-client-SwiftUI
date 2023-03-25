@@ -13,4 +13,5 @@ struct FriendViewModel {
     let lastName: String
     let image: URL?
     var imageData: Data?
+    var notAvailable: Bool
 }

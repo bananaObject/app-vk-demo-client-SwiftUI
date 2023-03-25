@@ -32,6 +32,6 @@ final class ResponseSuccess: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.success = try container.decode(Int.self, forKey: .success) == 1 ? true : false
+        self.success = try container.decode(Int.self, forKey: .success).getBool ? true : false
     }
 }

@@ -34,19 +34,27 @@ class ApplicationCoordinator: Coordinator {
     }
 
     func presentController(_ controller: UIViewController) {
-        self.controller?.present(controller, animated: true)
-        self.controller = controller
+        Task { @MainActor [weak self] in
+            try await Task.sleep(nanoseconds: 150_000_000)
+
+            self?.controller?.present(controller, animated: true)
+            self?.controller = controller
+        }
     }
 
     func navigationPushController(_ controller: UIViewController) {
-        let currentVc: UINavigationController?
+        Task { @MainActor [weak self] in
+            try await Task.sleep(nanoseconds: 150_000_000)
 
-        if let tabBarController = self.controller as? UITabBarController {
-            currentVc = tabBarController.selectedViewController as? UINavigationController
-        } else {
-            currentVc = controller as? UINavigationController
+            let currentVc: UINavigationController?
+
+            if let tabBarController = self?.controller as? UITabBarController {
+                currentVc = tabBarController.selectedViewController as? UINavigationController
+            } else {
+                currentVc = controller as? UINavigationController
+            }
+
+            currentVc?.pushViewController(controller, animated: true)
         }
-
-        currentVc?.pushViewController(controller, animated: true)
     }
 }

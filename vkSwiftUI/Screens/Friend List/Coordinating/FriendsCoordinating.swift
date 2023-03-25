@@ -37,8 +37,22 @@ class FriendsCoordinating: Coordinating {
         let item = UITabBarItem(title: "Friends",
                                 image: UIImage(systemName: "person.2"),
                                 selectedImage: UIImage(systemName: "person.2.fill"))
-        
-        self.controller = UIHostingController(rootView: FriendsListScreen(viewModel))
+
+        let controller: UIViewController
+
+        if #available(iOS 14, *) {
+            controller = UIHostingController(rootView: FriendsListScreen(viewModel))
+        } else {
+            // Обернул в контроллер так как ios 13 не поддерживает UIHostingController SwiftUI + Tab bar UIController, работает только ios 14 и выше
+            controller = UIViewController()
+            let child = UIHostingController(rootView: FriendsListScreen(viewModel))
+            controller.addChild(child)
+            child.view.frame = controller.view.frame
+            controller.view.addSubview(child.view)
+            child.didMove(toParent: controller)
+        }
+
+        self.controller = controller
         self.controller?.title = "Friends"
         self.controller?.tabBarItem = item
 
