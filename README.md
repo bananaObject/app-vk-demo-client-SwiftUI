@@ -39,6 +39,8 @@
 **Демоверсия мобильного приложения** для социальной сети ВКонтакте **разработана с использованием SwiftUI** и поддерживает **iOS 13 и выше**. 
 Для решения проблем несовершенств SwiftUI на iOS 13 **используется UIViewRepresentable и UIHostingController**.
 
+**Реализованы принципы программирования с протоколами (POP) и Dependency Injection (DI)** для более гибкой и расширяемой архитектуры приложения.
+
 В приложении были **добавлены AppDelegate и SceneDelegate**. Также **используется паттерн Coordinator** для управления навигацией и координацией. 
 
 **Используется реактивное программирование Combine** + **архитектура MVVM**. 
@@ -62,6 +64,7 @@
 # Технологии
 * SwiftUI (UIHostingController + UIViewRepresentable)
 * MVVM + Coordinator
+* POP + DI
 * Combine
 * Async/await
 * URLSession
