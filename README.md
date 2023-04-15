@@ -62,12 +62,14 @@
 - коллекция фотографий друга
 
 # Технологии
-* SwiftUI (UIHostingController + UIViewRepresentable)
+* Swift
+* SwiftUI 
+* UIKit(UIHostingController + UIViewRepresentable)
 * MVVM + Coordinator
 * POP + DI
 * Combine
 * Async/await
 * URLSession
 * CoreData
-* WKWebView
+* Webkit
 * Keychain
